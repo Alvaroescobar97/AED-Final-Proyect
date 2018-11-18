@@ -26,11 +26,12 @@ public class GraphList<T> implements GraphInterface<T>{
 		this.isWeighted = isWeighted;
 	}
 	
+	@Override
 	public void addVertex(T element) {
 		addVertex(new Vertex<T>(element));
 	}
 	
-	@Override
+	
 	public void addVertex(Vertex<T> vertex) throws IllegalArgumentException {
 		if(!adjList.containsKey(vertex)) {
 			this.adjList.put(vertex, new HashSet<Edge<T>>());

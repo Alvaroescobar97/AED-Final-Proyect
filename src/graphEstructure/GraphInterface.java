@@ -7,7 +7,7 @@ public interface GraphInterface<T> {
 	
 	public static final int INF = 150000000;
 	
-	public void addVertex(Vertex<T> vertex)throws IllegalArgumentException;
+	public void addVertex(T element);
 	public void addEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException;
 	public void addEdge(Vertex<T> from, Vertex<T> to, double weight)throws IllegalArgumentException;
 	public void removeVertex(Vertex<T> vertex);
