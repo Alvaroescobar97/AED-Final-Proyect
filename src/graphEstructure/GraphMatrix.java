@@ -17,6 +17,23 @@ public class GraphMatrix<T> {
 		vertexs = new ArrayList<>();
 	}
 
+	 public GraphMatrix(int n) throws IllegalArgumentException {
+	        if (n < 1) {
+	            throw new IllegalArgumentException("Error al crear grafo: n < 1");
+	        }
+	        for (int i = 0; i < n; i++) {
+	            if (i > 0) {
+	                this.vertexs.add(new Vertex<T>(null));
+	                this.numVertex++;
+	                this.matrix.add(new ArrayList<Edge<T>>());
+	            }
+	            for (int j = 0; j < n; j++) {
+	                if (!(i == 0 && j == 0)) {
+	                    this.matrix.get(i).add(null);
+	                }
+	            }
+	        }
+	    }
 	public void addVertex(Vertex v) throws IllegalArgumentException {
         if (this.vertexs.contains(v)) {
             throw new IllegalArgumentException("Error al añadir vértice: el vértice ya existe.");
