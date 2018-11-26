@@ -26,7 +26,7 @@
             <Font name="Haettenschweiler" size="28.0" />
          </font>
       </TextArea>
-      <Button layoutX="425.0" layoutY="576.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Volver al menú" textFill="#1b176f">
+      <Button fx:id="btnBack" layoutX="425.0" layoutY="576.0" mnemonicParsing="false" onAction="#backMenu" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Volver" textFill="#1b176f">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

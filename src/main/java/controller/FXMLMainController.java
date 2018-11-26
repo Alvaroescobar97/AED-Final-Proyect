@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class FMXLMainController implements Initializable {
+public class FXMLMainController implements Initializable {
 
 	@FXML
 	private Button btnStartGame;
