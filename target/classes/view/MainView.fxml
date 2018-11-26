@@ -10,9 +10,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" style="-fx-background-image: url('file:data/wallpaper.jpg');" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1203.0" style="-fx-background-image: url('file:data/wallpaper.jpg');" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox layoutY="661.0" prefHeight="20.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" AnchorPane.bottomAnchor="0.0">
+      <ImageView fitHeight="682.0" fitWidth="1309.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@../data/wallpaper.jpg" />
+         </image>
+      </ImageView>
+      <HBox layoutY="661.0" prefHeight="20.0" prefWidth="1212.0" style="-fx-background-color: #f5f5f5;" AnchorPane.bottomAnchor="0.0">
          <children>
             <Label prefHeight="20.0" prefWidth="430.0" text=" Proyecto Final: Estructuras de Datos Grupo 5">
                <font>
