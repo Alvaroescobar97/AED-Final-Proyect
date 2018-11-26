@@ -42,7 +42,7 @@ public class FMXLMainController implements Initializable {
 
 		AnchorPane gameViewParent;
 		try {
-			gameViewParent = (AnchorPane) loader.load(getClass().getResource("/designs/Stats.fxml").openStream());
+			gameViewParent = (AnchorPane) loader.load(getClass().getResource("/view/GameView.fxml").openStream());
 			FXMLGameController gameController = (FXMLGameController) loader.getController();
 
 			Scene gameScene = new Scene(gameViewParent);
