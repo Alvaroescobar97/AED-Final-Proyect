@@ -9,7 +9,7 @@ import java.util.Comparator;
  * @version 1.0
  * @since 2018-11-26
  * @param <T>
- *            vertex representation, bases on the kind of problem to solve.
+ *            vertex representation, based on the kind of problem to solve.
  */
 public class VertexWeightComparator<T extends Comparable<T>> implements Comparator<T> {
 	@Override
