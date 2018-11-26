@@ -41,15 +41,18 @@ public class Map {
 	}
 
 	/**
+	 * This method is used to set a new matrix as map.
 	 * 
 	 * @param boxes
+	 *            the new matrix.
 	 */
 	public void setBoxes(Box[][] boxes) {
 		this.boxes = boxes;
 	}
 
 	/**
-	 * 
+	 * This creates a random first level for the game, with easy difficulty. The
+	 * number of breakable boxes is 25.
 	 */
 	public void createLevelOne() {
 		createBorders();
@@ -83,7 +86,8 @@ public class Map {
 	}
 
 	/**
-	 * 
+	 * This creates a random second level for the game, with easy difficulty. The
+	 * number of breakable boxes is 50.
 	 */
 	public void createLevelTwo() {
 		createBorders();
@@ -115,7 +119,8 @@ public class Map {
 	}
 
 	/**
-	 * 
+	 * This creates a random third level for the game, with hard difficulty. The
+	 * number of breakable boxes is 60.
 	 */
 	public void createLevelThree() {
 		createBorders();
@@ -147,7 +152,8 @@ public class Map {
 	}
 
 	/**
-	 * 
+	 * This method creates the borders of the map. The borders of the map are the
+	 * first and last rows and columns.
 	 */
 	public void createBorders() {
 		for (int i = 0; i < boxes.length; i++) {
@@ -163,7 +169,8 @@ public class Map {
 	}
 
 	/**
-	 * 
+	 * This method creates a pattern of walls with two boxes of space, either for
+	 * rows or columns.
 	 */
 	public void createEasyPattern() {
 		for (int i = 2; i <= ROWS - 4; i += 3) {
@@ -175,7 +182,8 @@ public class Map {
 	}
 
 	/**
-	 * 
+	 * This method creates a pattern of walls with one box of space, either for rows
+	 * or columns.
 	 */
 	public void createHardPattern() {
 		for (int i = 2; i <= ROWS - 3; i += 2) {
