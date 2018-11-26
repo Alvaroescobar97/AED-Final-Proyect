@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" style="-fx-background-image: url('file:data/wallpaper.jpg');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutY="661.0" prefHeight="20.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" AnchorPane.bottomAnchor="0.0">
+         <children>
+            <Label prefHeight="20.0" prefWidth="430.0" text=" Proyecto Final: Estructuras de Datos Grupo 5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="764.0" text="                                                    © Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa" textAlignment="RIGHT">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <ImageView fitHeight="182.0" fitWidth="416.0" layoutX="729.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../data/logo.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="787.0" layoutY="209.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Comenzar Juego" textFill="#1b176f">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Haettenschweiler" size="35.0" />
+         </font>
+         <effect>
+            <Bloom threshold="0.0" />
+         </effect>
+      </Button>
+      <Button layoutX="787.0" layoutY="270.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Instrucciones" textFill="#1b176f">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Haettenschweiler" size="35.0" />
+         </font>
+         <effect>
+            <Bloom threshold="0.0" />
+         </effect>
+      </Button>
+      <Button layoutX="787.0" layoutY="331.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Salir" textFill="#1b176f">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Haettenschweiler" size="35.0" />
+         </font>
+         <effect>
+            <Bloom threshold="0.0" />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>
