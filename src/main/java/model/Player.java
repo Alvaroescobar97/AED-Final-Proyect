@@ -3,14 +3,21 @@ package model;
 /**
  * Player class, represents the main character of the game, Bomber.
  * 
- * @author Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa.
+ * @author Luis A. Rodriguez, ï¿½lvaro J. Escobar, Sebastiï¿½n Correa.
  * @version 1.0
  * @since 2018-11-26
  */
 public class Player {
-
+	public static final int UP = 1;
+	public static final int DOWN = 2;
+	public static final int RIGHT = 3;
+	public static final int LEFT = 4;
+	
 	private String nickname;
-	private Step steps;
+	private String imagePath;
+	private int i;
+	private int j;
+	private int numSteps;
 
 	/**
 	 * This is the Player class constructor, it is used to create instances of this
@@ -21,29 +28,46 @@ public class Player {
 	 */
 	public Player(String nickname) {
 		this.nickname = nickname;
-		this.steps = new Step(0);
+		this.imagePath = "";
+	}
+	
+	public String getImage() {
+		return this.imagePath;
+	}
+	
+	public void setImage(String imagePath) {
+		this.imagePath = imagePath;
+	}
+	
+	public int getSteps() {
+		return this.numSteps;
+	}
+	
+	public void setSteps(int numSteps) {
+		this.numSteps = numSteps;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public Step getSteps() {
-		return steps;
+	public String getNickname() {
+		return nickname;
+	}
+	
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	
+	public int getI() {
+		return i;
+	}
+	
+	public void setI(int i) {
+		this.i = i;
 	}
 
-	/**
-	 * 
-	 * @param steps
-	 */
-	public void setSteps(Step steps) {
-		this.steps = steps;
+	public int getJ() {
+		return j;
 	}
 
-	/**
-	 * 
-	 */
-	public void move() {
-
+	public void setJ(int j) {
+		this.j = j;
 	}
 }

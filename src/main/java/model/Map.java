@@ -2,11 +2,14 @@ package model;
 
 import java.util.Random;
 
+import graphEstructure.GraphMatrix;
+import graphEstructure.Vertex;
+
 /**
  * Map class, contains the classic labyrinth-type map of Bomberman and the main
  * character of the game, the Bomber.
  * 
- * @author Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa.
+ * @author Luis A. Rodriguez, ï¿½lvaro J. Escobar, Sebastiï¿½n Correa.
  * @version 1.0
  * @since 2018-11-26
  */
@@ -15,8 +18,9 @@ public class Map {
 
 	public static final int ROWS = 13;
 	public static final int COLUMNS = 13;
-
+	
 	private Box[][] boxes;
+	private GraphMatrix<Box> graph;
 	private Player bomberman;
 	private Random random;
 
@@ -83,6 +87,34 @@ public class Map {
 		boxes[13][COLUMNS - 1].setBreakable(false);
 		boxes[13][COLUMNS - 1].setOccupied(false);
 		boxes[13][COLUMNS - 1].setFinish(true);
+		fillGraph();
+	}
+	
+	public void fillGraph() {
+		this.graph = new GraphMatrix<Box>(12, false, false);
+		
+		for(int i = 1; i < boxes.length-1; i++) {
+			for(int j = 1; j < boxes[0].length-1; j++) {
+				
+				Box from =  boxes[i][j];
+				Vertex<Box> v1 = new Vertex<Box>(from);
+				
+				graph.addVertex(from);
+				if(boxes[i-1][j].isOccupied() && !boxes[i-1][j].isBreakable()) 
+					graph.addEdge(v1, new Vertex<Box>(boxes[i-1][j]));
+				
+				if(boxes[i][j+1].isOccupied() && !boxes[i][j+1].isBreakable()) 
+					graph.addEdge(v1, new Vertex<Box>(boxes[i][j+1]));
+				
+				if(boxes[i+1][j].isOccupied() && !boxes[i+1][j].isBreakable()) 
+					graph.addEdge(v1, new Vertex<Box>(boxes[i+1][j]));
+				
+				if(boxes[i][j-1].isOccupied() && !boxes[i][j-1].isBreakable()) 
+					graph.addEdge(v1, new Vertex<Box>(boxes[i][j-1]));
+			}
+		}
+		
+		
 	}
 
 	/**
@@ -116,6 +148,8 @@ public class Map {
 		boxes[1][COLUMNS - 1].setBreakable(false);
 		boxes[1][COLUMNS - 1].setOccupied(false);
 		boxes[1][COLUMNS - 1].setFinish(true);
+		
+		fillGraph();
 	}
 
 	/**
@@ -149,6 +183,8 @@ public class Map {
 		boxes[ROWS - 1][COLUMNS - 1].setBreakable(false);
 		boxes[ROWS - 1][COLUMNS - 1].setOccupied(false);
 		boxes[ROWS - 1][COLUMNS - 1].setFinish(true);
+		
+		fillGraph();
 	}
 
 	/**
@@ -194,8 +230,37 @@ public class Map {
 		}
 	}
 
-	public void movePlayer() {
-
+	public void movePlayer(int direction) {
+		if(direction ==  Player.UP && !boxes[bomberman.getI()+1][bomberman.getJ()].isOccupied()) {
+			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+			
+			bomberman.setI(bomberman.getI() +1);
+			bomberman.setSteps(bomberman.getSteps() +1);
+			
+			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+			
+		}else if(direction == Player.DOWN && !boxes[bomberman.getI()-1][bomberman.getJ()].isOccupied()) {
+			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+			
+			bomberman.setI(bomberman.getI() -1);
+			bomberman.setSteps(bomberman.getSteps() +1);
+			
+			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+		}else if(direction == Player.LEFT && !boxes[bomberman.getI()][bomberman.getJ() -1].isOccupied()) {
+			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+			
+			bomberman.setJ(bomberman.getJ() -1);
+			bomberman.setSteps(bomberman.getSteps() +1);
+			
+			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+		}else if(direction == Player.RIGHT && !boxes[bomberman.getI()][bomberman.getJ() +1].isOccupied()) {
+			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+			
+			bomberman.setJ(bomberman.getJ() +1);
+			bomberman.setSteps(bomberman.getSteps() +1);
+			
+			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+		}
 	}
 
 }
