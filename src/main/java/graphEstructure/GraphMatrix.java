@@ -2,10 +2,11 @@ package graphEstructure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
-
 
 public class GraphMatrix<T> implements GraphInterface<T>{
 
@@ -163,19 +164,69 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 
 	@Override
 	public void bfs(Vertex<T> startVertex) {
-		// TODO Auto-generated method stub
-		
+		if(!vertices.containsKey(startVertex.getValue())) {
+			throw new IllegalArgumentException("Vertex not found");
+		}
+		for(Vertex<T> u: getVertices()) {
+			if(!u.equals(startVertex)) {
+				u.setColor(Vertex.WHITE);
+				u.setD(INF);
+				u.setPred(null);
+			}
+		}
+		startVertex.setColor(Vertex.GRAY);
+		startVertex.setD(0);
+		startVertex.setPred(null);
+		Queue<Vertex<T>> queue = new LinkedList<Vertex<T>>();
+		queue.offer(startVertex);
+		while(!queue.isEmpty()) {
+			Vertex<T> u = queue.poll();
+			int index = vertices.get(u.getValue());
+			for(int i = 0; i < vertices.size(); i++) {
+				if(i != index) {
+					if(adjMatrix[index][i] != INF) {
+						Vertex<T> v = listVertex.get(i);
+						if(v.getColor() == Vertex.WHITE) {
+							v.setColor(Vertex.GRAY);
+							v.setD(u.getD());
+							v.setPred(u);
+							queue.offer(v);
+						}
+					}
+				}
+			}
+			u.setColor(Vertex.BLACK);
+		}
 	}
 
 	@Override
 	public void dfs() {
-		// TODO Auto-generated method stub
-		
+		for(Vertex<T> v : listVertex) {
+			v.setColor(Vertex.WHITE);
+		}
+		for(Vertex<T> u: listVertex) {
+			if(u.getColor() == Vertex.WHITE) {
+				dfsVisit(u);
+			}
+		}
+	}
+	
+	private void dfsVisit(Vertex<T> vertex) {
+		vertex.setColor(Vertex.BLACK);
+		int indexU = vertices.get(vertex);
+		for(int i = 0; i < vertices.size(); i++) {
+			if(i != indexU) {
+				Vertex<T> v = listVertex.get(i);
+				if(adjMatrix[indexU][i] != INF && v.getColor() == Vertex.WHITE) {
+					v.setPred(vertex);
+					dfsVisit(v);
+				}
+			}
+		}
 	}
 
 	@Override
 	public void dijkstra(Vertex<T> startVertex) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -204,9 +255,19 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 	}
 
 	@Override
-	public void floydWarshall() {
-		// TODO Auto-generated method stub
+	public int[][] floydWarshall() {
+		int[][] weightMatrix = adjMatrix.clone();
 		
+		for(int k = 0; k < weightMatrix.length; k++) {
+			for(int i = 0; i < weightMatrix.length; i++) {
+				for(int j = 0; j < weightMatrix.length; j++) {
+					if(weightMatrix[i][j] > weightMatrix[i][k] + weightMatrix[k][j]) {
+						weightMatrix[i][j] = weightMatrix[i][k] + weightMatrix[k][j];
+					}
+				}
+			}
+		}
+		return weightMatrix;
 	}
 
 	@Override

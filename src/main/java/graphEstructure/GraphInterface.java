@@ -29,6 +29,6 @@ public interface GraphInterface<T> {
 	public void initializeSingleSource(Vertex<T> vertex);
 	public void relax(Vertex<T> start, Vertex<T> finish);
 	public void prim(Vertex<T> vertex);	
-	public void floydWarshall();
+	public int[][] floydWarshall();
 	public void kruskal();
 }

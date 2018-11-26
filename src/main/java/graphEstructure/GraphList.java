@@ -422,8 +422,7 @@ public class GraphList<T> implements GraphInterface<T>{
 	}
 
 	@Override
-	public void floydWarshall() {
-		// TODO Auto-generated method stub
-		
+	public int[][] floydWarshall() {
+		return null;
 	}
 }
