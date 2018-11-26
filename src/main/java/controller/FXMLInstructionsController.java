@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -32,7 +30,6 @@ public class FXMLInstructionsController implements Initializable{
 		AnchorPane gameViewParent;
 		try {
 			gameViewParent = (AnchorPane) loader.load(getClass().getResource("/view/MainView.fxml").openStream());
-			FXMLMainController gameController = (FXMLMainController) loader.getController();
 			Scene gameScene = new Scene(gameViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
