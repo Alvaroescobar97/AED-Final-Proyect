@@ -82,7 +82,7 @@ public class Edge<T> implements Comparable<Edge<T>> {
 	 * This method is used to compare the weight of two edges.
 	 * 
 	 * @param toCompare
-	 *            the edge that will be compared to te edge that uses the method.
+	 *            the edge that will be compared to the edge that uses the method.
 	 * @return 0 if both edges are equal, 1 if the parameter edge has lower weight,
 	 *         -1 if the parameter edge has higher weight.
 	 */
