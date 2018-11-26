@@ -12,7 +12,7 @@ class AdjMatrixGraphTest {
 	GraphMatrix<Integer> graph;
 	
 	void setUpNoDirected() {
-		graph = new GraphMatrix<>();
+		
 	}
 	
 	@Test
