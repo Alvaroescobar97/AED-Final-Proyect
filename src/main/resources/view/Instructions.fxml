@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" style="-fx-background-image: url('file:resources/data/background.jpg');" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea editable="false" layoutX="239.0" layoutY="25.0" prefHeight="535.0" prefWidth="722.0" text="Instrucciones:&#10;Bomberman está atrapado en un laberinto, afortunadamente con sus bombas&#10;puede ir rompiendo bloques hasta llegar la salida.&#10;&#10;Peeeeero... la vida de Bomberman corre peligro, y si excede el número &#10;máximo de pasos morirá. Ayuda a Bomberman a escapar del laberinto,&#10;moviéndote con las flechas y poniendo bombas con espacio. &#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;Recuerda que Bomberman tiene un nuevo traje anti bombas, por lo que no &#10;tendrás que hacer movimientos extra para esquivar la explosión.">
+         <font>
+            <Font name="Haettenschweiler" size="28.0" />
+         </font>
+      </TextArea>
+      <Button layoutX="425.0" layoutY="576.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Volver al menú" textFill="#1b176f">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Haettenschweiler" size="35.0" />
+         </font>
+         <effect>
+            <Bloom threshold="0.0" />
+         </effect>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="322.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../data/arrows.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="300.0" layoutX="578.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../data/spacebar.png" />
+         </image>
+         <viewport>
+            <Rectangle2D height="100.0" />
+         </viewport>
+      </ImageView>
+      <Label layoutX="698.0" layoutY="438.0" text="Poner bomba">
+         <font>
+            <Font name="Haettenschweiler" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="374.0" layoutY="438.0" text="Mover a Bomberman">
+         <font>
+            <Font name="Haettenschweiler" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
