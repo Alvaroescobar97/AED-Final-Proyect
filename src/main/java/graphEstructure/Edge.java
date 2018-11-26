@@ -3,9 +3,9 @@ package graphEstructure;
 public class Edge<T> implements Comparable<Edge<T>>{
 	private Vertex<T> fromVertex;
 	private Vertex<T> toVertex;
-	private double weight;
+	private int weight;
 	
-	public Edge(Vertex<T> v1, Vertex<T> v2, double w) {
+	public Edge(Vertex<T> v1, Vertex<T> v2, int w) {
 		this.fromVertex = v1; 
 		this.toVertex = v2;
 		this.weight = w;
@@ -19,11 +19,11 @@ public class Edge<T> implements Comparable<Edge<T>>{
 		return toVertex;
 	}
 	
-	public double getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 	
-	public void setWeight(double weight) {
+	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 	

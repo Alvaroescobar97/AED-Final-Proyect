@@ -45,9 +45,9 @@ public class GraphList<T> implements GraphInterface<T>{
 	public void addEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException{
 		if(adjList.containsKey(from) && adjList.containsKey(to)) {
 			if(!isDirected) {
-				adjList.get(to).add(new Edge<T>(to,from, 1.0));
+				adjList.get(to).add(new Edge<T>(to,from, 1));
 			}
-			adjList.get(from).add(new Edge<T>(from,to, 1.0));
+			adjList.get(from).add(new Edge<T>(from,to, 1));
 			numEdges++;
 		}else {
 			throw new IllegalArgumentException();
@@ -55,7 +55,7 @@ public class GraphList<T> implements GraphInterface<T>{
 	}
 	
 	@Override
-	public void addEdge(Vertex<T> from, Vertex<T> to, double weight) throws IllegalArgumentException{
+	public void addEdge(Vertex<T> from, Vertex<T> to, int weight) throws IllegalArgumentException{
 		if(!isWeighted) throw new IllegalArgumentException();
 		
 		if(adjList.containsKey(from) && adjList.containsKey(to)) {
@@ -130,7 +130,7 @@ public class GraphList<T> implements GraphInterface<T>{
 	}
 	
 	@Override
-	public double getWeightEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
+	public int getWeightEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		if(adjList.containsKey(from)) {
 			for(Edge<T> edge: adjList.get(from)) {
 				if(edge.endVertex().equals(to)){
@@ -141,7 +141,7 @@ public class GraphList<T> implements GraphInterface<T>{
 		throw new IllegalArgumentException();
 	}
 	@Override
-	public void setWeightEdge(Vertex<T> from, Vertex<T> to, double weight)throws IllegalArgumentException {
+	public void setWeightEdge(Vertex<T> from, Vertex<T> to, int weight)throws IllegalArgumentException {
 		if(adjList.containsKey(from) && adjList.containsKey(to)) {
 			Edge<T> e1 = getEdge(from,to);
 			e1.setWeight(weight);

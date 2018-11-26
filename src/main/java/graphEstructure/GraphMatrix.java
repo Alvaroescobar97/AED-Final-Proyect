@@ -2,12 +2,15 @@ package graphEstructure;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 
 public class GraphMatrix<T> implements GraphInterface<T>{
 
 	private Map<T, Integer> vertices;
+	private List<Vertex<T>> listVertex;
 	private int[][] adjMatrix;
 	private int index;
 	private int numVertex;
@@ -19,6 +22,7 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 		this.isDirected = isDirected;
 		this.isWeighted = isWeighted;
 		this.vertices = new HashMap<T, Integer>();
+		this.listVertex = new ArrayList<Vertex<T>>();
 		this.index = 0;
 		adjMatrix = new int[numVertex][numVertex];
 		
@@ -38,6 +42,7 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 	private void addVertex(Vertex<T> vertex) throws IllegalArgumentException{
 		if(vertices.containsKey(vertex.getValue())) throw new IllegalArgumentException("Vertex exist");
 		vertices.put(vertex.getValue(), index);
+		listVertex.add(vertex);
 		index++;
 	}
 
@@ -91,14 +96,13 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 
 	@Override
 	public Vertex<T> getVertex(T element) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		if(vertices.containsKey(element)) return listVertex.get(vertices.get(element));
+		throw new IllegalArgumentException("Vertex not found");
 	}
 
 	@Override
 	public Iterable<Vertex<T>> getVertices() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.listVertex;
 	}
 
 	@Override
@@ -109,26 +113,33 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 
 	@Override
 	public Iterable<Edge<T>> getEdges(Vertex<T> vertex) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Edge<T>> edges = new ArrayList<>();
+		for(int i = 0; i < adjMatrix.length; i++) {
+			for(int j = 0; j < adjMatrix[0].length; j++) {
+				if(adjMatrix[i][j] == 1)
+					edges.add(new Edge<T>(listVertex.get(i), listVertex.get(j), adjMatrix[i][j]));
+			}
+		}
+		return edges;
 	}
 
 	@Override
-	public double getWeightEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getWeightEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
+		return this.adjMatrix[vertices.get(from.getValue())][vertices.get(to.getValue())];
 	}
 
 	@Override
 	public void setWeightEdge(Vertex<T> from, Vertex<T> to, int weight) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
+		this.adjMatrix[vertices.get(from.getValue())][vertices.get(to.getValue())] = weight;
 	}
 
 	@Override
 	public boolean isAdjacent(Vertex<T> from, Vertex<T> to) {
-		// TODO Auto-generated method stub
-		return false;
+		int indexVertex1 = vertices.get(from.getValue());
+		int indexVertex2 = vertices.get(to.getValue());
+		
+		if(adjMatrix[indexVertex1][indexVertex2] != INF) return true;
+		else return false;
 	}
 
 	@Override
@@ -144,7 +155,8 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 	}
 
 	@Override
-	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) throws IllegalArgumentException {
+	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) 
+			throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -203,5 +215,47 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 		
 	}
 
-	
+	public List<Vertex<T>> getListVertex() {
+		return listVertex;
+	}
+
+	public void setListVertex(List<Vertex<T>> listVertex) {
+		this.listVertex = listVertex;
+	}
+
+	public int[][] getAdjMatrix() {
+		return adjMatrix;
+	}
+
+	public void setAdjMatrix(int[][] adjMatrix) {
+		this.adjMatrix = adjMatrix;
+	}
+
+	public int getNumVertex() {
+		return numVertex;
+	}
+
+	public void setNumVertex(int numVertex) {
+		this.numVertex = numVertex;
+	}
+
+	public boolean isDirected() {
+		return isDirected;
+	}
+
+	public void setDirected(boolean isDirected) {
+		this.isDirected = isDirected;
+	}
+
+	public boolean isWeighted() {
+		return isWeighted;
+	}
+
+	public void setWeighted(boolean isWeighted) {
+		this.isWeighted = isWeighted;
+	}
+
+	public void setVertices(Map<T, Integer> vertices) {
+		this.vertices = vertices;
+	}
 }
