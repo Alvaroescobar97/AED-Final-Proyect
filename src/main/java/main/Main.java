@@ -1,4 +1,4 @@
-package model;
+package main;
 
 import model.Map;
 import javafx.application.Application;
