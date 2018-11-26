@@ -21,7 +21,7 @@
    <children>
       <ImageView fitHeight="682.0" fitWidth="1309.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <image>
-            <Image url="@../data/wallpaper.jpg" />
+            <Image url="@/data/wallpaper.jpg" />
          </image>
       </ImageView>
       <HBox layoutY="661.0" prefHeight="20.0" prefWidth="1212.0" style="-fx-background-color: #f5f5f5;" AnchorPane.bottomAnchor="0.0">
@@ -40,7 +40,7 @@
       </HBox>
       <ImageView fitHeight="182.0" fitWidth="416.0" layoutX="729.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../data/logo.png" />
+            <Image url="@/data/logo.png" />
          </image>
       </ImageView>
       <Button fx:id="btnStartGame" layoutX="787.0" layoutY="209.0" mnemonicParsing="false" onAction="#startGame" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Comenzar Juego" textFill="#1b176f">
