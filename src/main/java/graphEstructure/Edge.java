@@ -1,7 +1,7 @@
 package graphEstructure;
 
 /**
- * Edge class, represents the edge of the graph.
+ * Edge class, represents a generic edge of the graph.
  * 
  * @author Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa.
  * @version 1.0
@@ -15,7 +15,7 @@ public class Edge<T> implements Comparable<Edge<T>> {
 	private int weight;
 
 	/**
-	 * This is the edge class constructor, used to create an edge between a pair of
+	 * This is the edge class constructor, it is used to create an edge between a pair of
 	 * vertexes.
 	 * 
 	 * @param v1
@@ -59,7 +59,7 @@ public class Edge<T> implements Comparable<Edge<T>> {
 	}
 
 	/**
-	 * This method is used to set/change the cost of an edge.
+	 * This method is used to set or change the cost of an edge.
 	 * 
 	 * @param weight
 	 *            the weight of an edge.
