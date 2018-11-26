@@ -1,10 +1,12 @@
 package graphEstructure;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 	private Map<T, Integer> vertices;
 	private List<Vertex<T>> listVertex;
 	private int[][] adjMatrix;
+	private int[][] distMatrix;
 	private int index;
 	private int numVertex;
 	private boolean isDirected;
@@ -32,6 +35,8 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 				adjMatrix[i][j] = INF;
 			}
 		}
+		
+		distMatrix = adjMatrix.clone();
 	}
 
 	@Override
@@ -77,7 +82,6 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 
 	@Override
 	public void removeVertex(Vertex<T> vertex) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -108,7 +112,6 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 
 	@Override
 	public Edge<T> getEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -118,7 +121,7 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 		for(int i = 0; i < adjMatrix.length; i++) {
 			for(int j = 0; j < adjMatrix[0].length; j++) {
 				if(adjMatrix[i][j] == 1)
-					edges.add(new Edge<T>(listVertex.get(i), listVertex.get(j), adjMatrix[i][j]));
+					edges.add(new Edge<T>(listVertex.get(i), listVertex.get(j), distMatrix[i][j]));
 			}
 		}
 		return edges;
@@ -145,20 +148,25 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 
 	@Override
 	public Set<Vertex<T>> adjacentVertices(Vertex<T> vertex) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Iterable<Edge<T>> getEdges() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Edge<T>> getEdges() {
+		ArrayList<Edge<T>> edges = new ArrayList<>();
+		for(int i = 0; i < adjMatrix.length; i++) {
+			for(int j = 0; j < adjMatrix[0].length; j++) {
+				if(adjMatrix[i][j] == 1) {
+					edges.add(new Edge<T>(listVertex.get(i), listVertex.get(j), distMatrix[i][j]));
+				}
+			}
+		}
+		return edges;
 	}
 
 	@Override
 	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) 
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -227,31 +235,64 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 
 	@Override
 	public void dijkstra(Vertex<T> startVertex) {
-		
+		ShortestPath sp = new ShortestPath();
+		int src = vertices.get(startVertex.getValue());
+		sp.dijkstra(distMatrix, src);
 	}
 
 	@Override
 	public boolean bellmanFord(Vertex<T> starVertex) {
-		// TODO Auto-generated method stub
-		return false;
+		ShortestPath sp = new ShortestPath();
+		int src = vertices.get(starVertex.getValue());
+		return sp.bellmanford(distMatrix, src);
 	}
 
 	@Override
 	public void initializeSingleSource(Vertex<T> vertex) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void relax(Vertex<T> start, Vertex<T> finish) {
-		// TODO Auto-generated method stub
 		
 	}
 
+	public ArrayList<Vertex<T>> getAdjacentVertices(Vertex<T> v){
+		int index = vertices.get(v.getValue());
+		ArrayList<Vertex<T>> result = new ArrayList<Vertex<T>>();
+		
+		for(int i = 0; i < adjMatrix[index].length; i++) {
+			if(adjMatrix[index][i] != INF && adjMatrix[index][i] != 0) 
+				result.add(listVertex.get(i));
+		}
+		return result;
+	}
+	
 	@Override
 	public void prim(Vertex<T> vertex) {
-		// TODO Auto-generated method stub
-		
+		for(Vertex<T> v : listVertex) {
+			v.setD(INF);
+			v.setPred(null);
+			v.setColor(Vertex.WHITE);
+		}
+		vertex.setD(0);
+		vertex.setPred(null);
+		PriorityQueue<Vertex<T>> q = new PriorityQueue<>();
+		q.offer(vertex);
+		while(!q.isEmpty()) {
+			Vertex<T> u = q.poll();
+			ArrayList<Vertex<T>> adjVertices = getAdjacentVertices(u);
+			for(Vertex<T> v : adjVertices) {
+				int w = getEdgeWeight(u, v);
+				if(v.getColor() == Vertex.WHITE && w < v.getD()) {
+					v.setD(w);
+					q.offer(v);
+					v.setPred(u);
+					
+				}
+				u.setColor(Vertex.BLACK);
+			}
+		}
 	}
 
 	@Override
@@ -267,13 +308,36 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 				}
 			}
 		}
+		distMatrix = weightMatrix;
 		return weightMatrix;
 	}
 
 	@Override
-	public void kruskal() {
-		// TODO Auto-generated method stub
+	public ArrayList<Edge<T>> kruskal() {
+		ArrayList<Edge<T>> res = new ArrayList<>();
+		int a = 0;
+		int i = 0;
+		ArrayList<Edge<T>> edgesList = getEdges();
+		Collections.sort(edgesList);
+		UnionFind u = new UnionFind(listVertex.size());
 		
+		while(a < listVertex.size() -1 && i < edgesList.size()) {
+			Edge<T> edge = edgesList.get(i);
+			i++;
+			int x = u.find(listVertex.indexOf(edge.initVertex()));
+			int y = u.find(listVertex.indexOf(edge.endVertex()));
+			if(x != y) {
+				res.add(edge);
+				u.union(x, y);
+			}
+		}
+		return res;
+	}
+	
+	public int getEdgeWeight(Vertex<T> u, Vertex<T> v) {
+		int posU = vertices.get(u.getValue());
+		int posV = vertices.get(v.getValue());
+		return distMatrix[posU][posV];
 	}
 
 	public List<Vertex<T>> getListVertex() {
@@ -319,4 +383,79 @@ public class GraphMatrix<T> implements GraphInterface<T>{
 	public void setVertices(Map<T, Integer> vertices) {
 		this.vertices = vertices;
 	}
+	
+	protected class ShortestPath{
+		
+		private int minDistance(int[] dist, boolean sptSet[]) {
+			int min = INF;
+			int min_index = -1;
+			for(int i = 0; i < listVertex.size(); i++) {
+				if(sptSet[i] == false && dist[i] < min) {
+					min = dist[i];
+					min_index = i;
+				}
+			}
+			
+			return min_index;
+		}
+		
+		private void dijkstra(int[][] graph, int src) {
+			int[] dist = new int[listVertex.size()];
+			boolean[] sptSet = new boolean[listVertex.size()];
+			
+			for(int i = 0; i < listVertex.size(); i++) {
+				dist[i] = INF;
+				sptSet[i] = false;
+			}
+			
+			dist[src] = 0;
+			int u = -1;
+			for(int count = 0; count < listVertex.size() -1; count++) {
+				u = minDistance(dist,sptSet);
+				sptSet[u] = true;
+				for(int v = 0; v < listVertex.size(); v++) {
+					if(!sptSet[v] && graph[u][v] != 0 && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) {
+						dist[v] = dist[u] + graph[u][v];
+						listVertex.get(v).setD(dist[u] + graph[u][v]);
+						listVertex.get(v).setPred(listVertex.get(u));
+					}
+				}
+			}
+			distMatrix[src] = dist;
+			
+		}
+		
+		private boolean bellmanford(int[][] graph, int src) {
+			int[] dist = new int[listVertex.size()];
+			boolean[] sptSet = new boolean[listVertex.size()];
+			for(int i = 0; i < listVertex.size(); i++) {
+				dist[i] = INF;
+				sptSet[i] = false;
+			}
+			dist[src] = 0;
+			int u = -1;
+			for(int count = 0; count < listVertex.size() -1; count++) {
+				u = minDistance(dist,sptSet);
+				sptSet[u] = true;
+				for(int v = 0; v < listVertex.size(); v++) {
+					if(!sptSet[v] && graph[u][v] != 0 && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) {
+						dist[v] = dist[u] + graph[u][v];
+						listVertex.get(v).setD(dist[u] + graph[u][v]);
+						listVertex.get(v).setPred(listVertex.get(u));
+					}
+				}
+			}
+			
+			for(int v = 0; v < listVertex.size(); v++) {
+				if(!sptSet[v] && graph[u][v] != 0 && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) {
+					return false;
+				}
+			}
+			distMatrix[src] = dist;
+			return true;
+			
+			
+		}
+	}
+	
 }

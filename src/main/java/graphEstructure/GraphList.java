@@ -416,9 +416,8 @@ public class GraphList<T> implements GraphInterface<T>{
 	}
 
 	@Override
-	public void kruskal() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Edge<T>> kruskal() {
+		return null;
 	}
 
 	@Override

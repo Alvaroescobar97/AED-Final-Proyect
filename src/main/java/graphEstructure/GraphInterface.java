@@ -30,5 +30,5 @@ public interface GraphInterface<T> {
 	public void relax(Vertex<T> start, Vertex<T> finish);
 	public void prim(Vertex<T> vertex);	
 	public int[][] floydWarshall();
-	public void kruskal();
+	public ArrayList<Edge<T>> kruskal();
 }
