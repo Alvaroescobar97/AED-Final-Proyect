@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Map {
 
-	public static final int ROWS = 15;
-	public static final int COLUMNS = 15;
+	public static final int ROWS = 13;
+	public static final int COLUMNS = 13;
 
 	private Box[][] boxes;
 	private Player bomberman;
@@ -13,6 +13,7 @@ public class Map {
 
 	public Map() {
 		this.boxes = new Box[ROWS][COLUMNS];
+		this.bomberman = new Player("Bomberman");
 		random = new Random();
 	}
 
@@ -129,4 +130,8 @@ public class Map {
 		}
 	}
 
+	public void movePlayer() {
+		
+	}
+	
 }
