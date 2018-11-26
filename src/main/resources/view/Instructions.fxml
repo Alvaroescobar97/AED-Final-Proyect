@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -19,8 +11,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" style="-fx-background-image: url('file:resources/data/background.jpg');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLInstructionsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLInstructionsController">
    <children>
+      <ImageView fitHeight="760.0" fitWidth="1200.0" layoutX="39.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-85.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../data/background.jpg" />
+         </image>
+      </ImageView>
       <TextArea editable="false" layoutX="239.0" layoutY="25.0" prefHeight="535.0" prefWidth="722.0" text="Instrucciones:&#10;Bomberman está atrapado en un laberinto, afortunadamente con sus bombas&#10;puede ir rompiendo bloques hasta llegar la salida.&#10;&#10;Peeeeero... la vida de Bomberman corre peligro, y si excede el número &#10;máximo de pasos morirá. Ayuda a Bomberman a escapar del laberinto,&#10;moviéndote con las flechas y poniendo bombas con espacio. &#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;Recuerda que Bomberman tiene un nuevo traje anti bombas, por lo que no &#10;tendrás que hacer movimientos extra para esquivar la explosión.">
          <font>
             <Font name="Haettenschweiler" size="28.0" />
