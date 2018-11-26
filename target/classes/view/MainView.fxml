@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" style="-fx-background-image: url('file:data/wallpaper.jpg');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLMainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" style="-fx-background-image: url('file:data/wallpaper.jpg');" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="java.controller.FXMLMainController">
    <children>
       <HBox layoutY="661.0" prefHeight="20.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" AnchorPane.bottomAnchor="0.0">
          <children>
@@ -31,7 +31,7 @@
             <Image url="@../data/logo.png" />
          </image>
       </ImageView>
-      <Button layoutX="787.0" layoutY="209.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Comenzar Juego" textFill="#1b176f">
+      <Button fx:id="btnStartGame" layoutX="787.0" layoutY="209.0" mnemonicParsing="false" onAction="#startGame" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Comenzar Juego" textFill="#1b176f">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -42,7 +42,7 @@
             <Bloom threshold="0.0" />
          </effect>
       </Button>
-      <Button layoutX="787.0" layoutY="270.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Instrucciones" textFill="#1b176f">
+      <Button fx:id="btnInstructions" layoutX="787.0" layoutY="270.0" mnemonicParsing="false" onAction="#showInstructions" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Instrucciones" textFill="#1b176f">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -53,7 +53,7 @@
             <Bloom threshold="0.0" />
          </effect>
       </Button>
-      <Button layoutX="787.0" layoutY="331.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Salir" textFill="#1b176f">
+      <Button fx:id="btnExit" layoutX="787.0" layoutY="331.0" mnemonicParsing="false" onAction="#exit" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Salir" textFill="#1b176f">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
