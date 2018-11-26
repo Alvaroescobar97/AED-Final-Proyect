@@ -54,7 +54,7 @@
             <Bloom threshold="0.0" />
          </effect>
       </Button>
-      <Button layoutX="787.0" layoutY="270.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Instrucciones" textFill="#1b176f">
+      <Button fx:id="btnInstructions" layoutX="787.0" layoutY="270.0" mnemonicParsing="false" onAction="#instruccionsView" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Instrucciones" textFill="#1b176f">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -65,7 +65,7 @@
             <Bloom threshold="0.0" />
          </effect>
       </Button>
-      <Button layoutX="787.0" layoutY="331.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Salir" textFill="#1b176f">
+      <Button fx:id="btnExit" layoutX="787.0" layoutY="331.0" mnemonicParsing="false" onAction="#exit" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #afeeee;" text="Salir" textFill="#1b176f">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

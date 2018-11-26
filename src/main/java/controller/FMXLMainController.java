@@ -31,11 +31,6 @@ public class FMXLMainController implements Initializable {
 	}
 
 	@FXML
-	public void eventExit(ActionEvent event) {
-
-	}
-
-	@FXML
 	public void startGame(ActionEvent event) {
 
 		FXMLLoader loader = new FXMLLoader();
@@ -52,19 +47,34 @@ public class FMXLMainController implements Initializable {
 			window.alwaysOnTopProperty();
 			window.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
+	
+	@FXML
+    public void instruccionsView(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader();
+
+		AnchorPane gameViewParent;
+		try {
+			gameViewParent = (AnchorPane) loader.load(getClass().getResource("/view/Instructions.fxml").openStream());
+			FXMLInstructionsController gameController = (FXMLInstructionsController) loader.getController();
+
+			Scene gameScene = new Scene(gameViewParent);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+			window.setScene(gameScene);
+			window.alwaysOnTopProperty();
+			window.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
 	@FXML
-	public void showInstructions() {
-	}
-
-	@FXML
-	public void exit() {
-
+	public void exit(ActionEvent event) {
+		System.exit(0);
 	}
 
 }
