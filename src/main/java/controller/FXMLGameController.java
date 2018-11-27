@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import model.Map;
 import model.Player;
 
@@ -14,6 +15,11 @@ public class FXMLGameController implements Initializable{
 
 	 private Map map;
 	
+	 private Label[][] labels;
+	 
+	 @FXML
+	 private GridPane gameGrid;
+	 
 	 @FXML
 	 private Label lbTime;
 	
@@ -48,6 +54,8 @@ public class FXMLGameController implements Initializable{
 		 	case RIGHT: 
 		 		map.movePlayer(Player.RIGHT);
 		 		break;
+		 	default:
+		 		break;
 		 } 
 	 }
 
@@ -56,17 +64,39 @@ public class FXMLGameController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		map =  new Map();
 		map.createLevelOne();
-		//fillGui();
+		fillLabelMatrix();
+		refresh();
 	}
 	
-	public void fillGui(){
+	public void refresh(){
+		for(int i = 0; i < Map.ROWS; i++) {
+			for(int j = 0; j <  Map.ROWS; j++) {
+				labelImage(labels[i][j], i, j);
+				gameGrid.add(labels[i][j], j, i);
+			}
+		}
+	}
+	
+	public void fillLabelMatrix() {
+		labels = new Label[Map.ROWS][Map.ROWS];
 		
+		for(int i = 0; i < Map.ROWS; i++) {
+			for(int j = 0; j <  Map.ROWS; j++) {
+				labels[i][j] = new Label("[" + i + "]" + "[" + j + "]");
+			}
+		}
 	}
 	 
-	 
-	 
-	 
-	 
-	 
+	public void labelImage(Label label, int i, int j) {
+		if(map.getBoxes()[i][j].isBomberman()) {
+			
+		}else if(!map.getBoxes()[i][j].isBreakable() && map.getBoxes()[i][j].isOccupied()) {
+			
+		}else if(!map.getBoxes()[i][j].isBreakable() && map.getBoxes()[i][j].isOccupied()) {
+			
+		}else{
+			
+		}
+	}
 	 
 }

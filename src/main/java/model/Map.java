@@ -90,6 +90,7 @@ public class Map {
 		boxes[1][0].setBreakable(false);
 		boxes[1][0].setOccupied(false);
 		boxes[1][0].setStart(true);
+		boxes[1][0].setBomberman(true);
 
 		boxes[12][COLUMNS - 1].setBreakable(false);
 		boxes[12][COLUMNS - 1].setOccupied(false);
@@ -256,33 +257,41 @@ public class Map {
 	public void movePlayer(int direction) {
 		if(direction ==  Player.UP && !boxes[bomberman.getI()+1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 			
 			bomberman.setI(bomberman.getI() +1);
 			bomberman.setSteps(bomberman.getSteps() +1);
 			
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 			
 		}else if(direction == Player.DOWN && !boxes[bomberman.getI()-1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 			
 			bomberman.setI(bomberman.getI() -1);
 			bomberman.setSteps(bomberman.getSteps() +1);
 			
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 		}else if(direction == Player.LEFT && !boxes[bomberman.getI()][bomberman.getJ() -1].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 			
 			bomberman.setJ(bomberman.getJ() -1);
 			bomberman.setSteps(bomberman.getSteps() +1);
 			
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 		}else if(direction == Player.RIGHT && !boxes[bomberman.getI()][bomberman.getJ() +1].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 			
 			bomberman.setJ(bomberman.getJ() +1);
 			bomberman.setSteps(bomberman.getSteps() +1);
 			
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 		}
 	}
 

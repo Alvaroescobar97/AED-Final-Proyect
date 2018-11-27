@@ -15,7 +15,7 @@ public class Box {
 	private boolean breakable;
 	private boolean start;
 	private boolean finish;
-
+	private boolean isBomberman;
 	/**
 	 * This is the box class constructor, it is used to create instances of this
 	 * class.
@@ -110,10 +110,13 @@ public class Box {
 	public void setFinish(boolean finish) {
 		this.finish = finish;
 	}
-	
-	public String toString() {
-		if(!isOccupied()) return "No Esta ocupado";
-		return "Esta ocupado";
+
+	public boolean isBomberman() {
+		return isBomberman;
+	}
+
+	public void setBomberman(boolean isBomberman) {
+		this.isBomberman = isBomberman;
 	}
 
 }
