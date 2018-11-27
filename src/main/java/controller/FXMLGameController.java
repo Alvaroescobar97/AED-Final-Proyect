@@ -6,8 +6,11 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import model.Box;
 import model.Map;
 import model.Player;
 
@@ -44,15 +47,19 @@ public class FXMLGameController implements Initializable{
 		 switch(event.getCode()) {
 		 	case UP: 
 		 		map.movePlayer(Player.UP);
+		 		refresh();
 		 		break;
 		 	case DOWN:
 		 		map.movePlayer(Player.DOWN);
+		 		refresh();
 		 		break;
 		 	case LEFT: 
 		 		map.movePlayer(Player.LEFT);
+		 		refresh();
 		 		break;
 		 	case RIGHT: 
 		 		map.movePlayer(Player.RIGHT);
+		 		refresh();
 		 		break;
 		 	default:
 		 		break;
@@ -88,14 +95,26 @@ public class FXMLGameController implements Initializable{
 	}
 	 
 	public void labelImage(Label label, int i, int j) {
+		
+		Box box = map.getBoxes()[i][j];
+		
 		if(map.getBoxes()[i][j].isBomberman()) {
-			
-		}else if(!map.getBoxes()[i][j].isBreakable() && map.getBoxes()[i][j].isOccupied()) {
-			
-		}else if(!map.getBoxes()[i][j].isBreakable() && map.getBoxes()[i][j].isOccupied()) {
-			
-		}else{
-			
+			String path = map.getBomberman().getImage();
+			Image image = new Image(getClass().getResourceAsStream(path));
+		    label.setGraphic(new ImageView(image));
+		}else if(!box.isBreakable() && box.isOccupied() && !box.isFinish() && !box.isStart()) {
+			Image image = new Image(getClass().getResourceAsStream("/data/Bloque.jpg"));
+		    label.setGraphic(new ImageView(image));
+		}else if(box.isBreakable() && box.isOccupied() && !box.isFinish() && !box.isStart()) {
+			Image image = new Image(getClass().getResourceAsStream("/data/Caja.jpg"));
+		    label.setGraphic(new ImageView(image));
+		}else if(box.isStart()){
+			label.setStyle("-fx-background-color: black;");
+		}else if(box.isFinish()) {
+			label.setStyle("-fx-background-color: blue;");
+		}else {
+			Image image = new Image(getClass().getResourceAsStream("/data/Pasto.jpg"));
+		    label.setGraphic(new ImageView(image));
 		}
 	}
 	 

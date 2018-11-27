@@ -41,6 +41,14 @@ public class Map {
 		random = new Random();
 	}
 
+	public Player getBomberman() {
+		return bomberman;
+	}
+
+	public void setBomberman(Player bomberman) {
+		this.bomberman = bomberman;
+	}
+
 	/**
 	 * This method returns the matrix of boxes that represents the labyrinth-type
 	 * map.
@@ -95,6 +103,7 @@ public class Map {
 		boxes[12][COLUMNS - 1].setBreakable(false);
 		boxes[12][COLUMNS - 1].setOccupied(false);
 		boxes[12][COLUMNS - 1].setFinish(true);
+		
 		fillGraph();
 	}
 	
@@ -159,6 +168,7 @@ public class Map {
 					&& boxes[randomRow][randomColumn].isOccupied() == false
 					&& boxes[randomRow][randomColumn].isStart() == false
 					&& boxes[randomRow][randomColumn].isFinish() == false) {
+				
 				boxes[randomRow][randomColumn].setBreakable(true);
 				boxes[randomRow][randomColumn].setOccupied(true);
 				breakable++;
@@ -255,6 +265,7 @@ public class Map {
 	}
 
 	public void movePlayer(int direction) {
+		
 		if(direction ==  Player.UP && !boxes[bomberman.getI()+1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
@@ -265,6 +276,8 @@ public class Map {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 			
+			bomberman.setImage("/data/Bomber_Back.png");
+			
 		}else if(direction == Player.DOWN && !boxes[bomberman.getI()-1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
@@ -274,6 +287,8 @@ public class Map {
 			
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
+			
+			bomberman.setImage("/data/Bomber_Front.png");
 		}else if(direction == Player.LEFT && !boxes[bomberman.getI()][bomberman.getJ() -1].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
@@ -283,6 +298,8 @@ public class Map {
 			
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
+			
+			bomberman.setImage("/data/Bomber_Left.png");
 		}else if(direction == Player.RIGHT && !boxes[bomberman.getI()][bomberman.getJ() +1].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
@@ -292,6 +309,8 @@ public class Map {
 			
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
+			
+			bomberman.setImage("/data/Bomber_Rigth.png");
 		}
 	}
 
