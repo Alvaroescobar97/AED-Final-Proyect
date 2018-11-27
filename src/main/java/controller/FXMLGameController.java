@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,10 +43,11 @@ public class FXMLGameController implements Initializable {
 
 	@FXML
 	private Label lbNumMaxSteps;
+	
 
 	@FXML
 	public void movePlayer(KeyEvent event) {		
-		
+			
 		if (event.getCode() == KeyCode.UP) {
 			
 			map.movePlayer(Player.UP);
@@ -76,13 +78,11 @@ public class FXMLGameController implements Initializable {
 		fillLabelMatrix();
 		refresh();	
 		
-		gameGrid.setOnKeyPressed(new EventHandler<KeyEvent>() {
-	        public void handle(KeyEvent ke) {
-	            if (ke.getCode() == KeyCode.ENTER) {
-	                System.out.println("Key Pressed: " + ke.getCode());
-	            }
-	        }
-	    });
+		lbTime.setOnKeyPressed(
+				event -> {
+					System.out.println("Pirobos todos");
+				}
+		);
 	}
 
 	public void refresh() {
