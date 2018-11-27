@@ -26,18 +26,20 @@ public class FXMLMainController implements Initializable {
 
 	@FXML
 	private Button btnExit;
+	
+	private FXMLGameController game;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		this.game =  new FXMLGameController();
 	}
 
 	@FXML
 	public void startGame(ActionEvent event) {
 
 		FXMLLoader loader = new FXMLLoader();
-
 		AnchorPane gameViewParent;
+		
 		try {
 			gameViewParent = (AnchorPane) loader.load(getClass().getResource("/view/GameView.fxml").openStream());
 
@@ -46,14 +48,14 @@ public class FXMLMainController implements Initializable {
 			
 			gameScene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 				public void handle(KeyEvent event) {
-					System.out.println("Barrios es guay");
+					game.movePlayer(event.getCode().toString());
 				}
 			});
-			
 			
 			window.setScene(gameScene);
 			window.alwaysOnTopProperty();
 			window.show();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

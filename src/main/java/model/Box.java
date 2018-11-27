@@ -118,5 +118,9 @@ public class Box {
 	public void setBomberman(boolean isBomberman) {
 		this.isBomberman = isBomberman;
 	}
+	
+	public String toString() {
+		return isOccupied() ? "Ocupado" : "Desocupado";
+	}
 
 }

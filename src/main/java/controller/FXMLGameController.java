@@ -3,9 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -18,7 +15,7 @@ import model.Box;
 import model.Map;
 import model.Player;
 
-public class FXMLGameController implements Initializable, EventHandler<KeyEvent> {
+public class FXMLGameController implements Initializable {
 
 	private Map map;
 
@@ -46,25 +43,17 @@ public class FXMLGameController implements Initializable, EventHandler<KeyEvent>
 	private Label lbNumMaxSteps;
 	
 
-	@FXML
-	public void movePlayer(KeyEvent event) {		
-			
-		if (event.getCode() == KeyCode.UP) {
-			
+	public void movePlayer(String event) {
+		if (event.equals("UP")) {
 			map.movePlayer(Player.UP);
 			refresh();
-		} else if (event.getCode() == KeyCode.DOWN) {
-			
+		} else if (event.equals("DOWN")) {
 			map.movePlayer(Player.DOWN);
 			refresh();
-
-		} else if (event.getCode() == KeyCode.LEFT) {
-			
+		} else if (event.equals("LEFT")) {
 			map.movePlayer(Player.LEFT);
 			refresh();
-			
-		} else if (event.getCode() == KeyCode.RIGHT) {
-			
+		} else if (event.equals("RIGHT")) {
 			map.movePlayer(Player.RIGHT);
 			refresh();
 		}
@@ -79,6 +68,7 @@ public class FXMLGameController implements Initializable, EventHandler<KeyEvent>
 	}
 
 	public void refresh() {
+		gameGrid.getChildren().clear();
 		for (int i = 0; i < Map.ROWS; i++) {
 			for (int j = 0; j < Map.ROWS; j++) {
 				labelImage(labels[i][j], i, j);
@@ -111,20 +101,9 @@ public class FXMLGameController implements Initializable, EventHandler<KeyEvent>
 		} else if (box.isBreakable() && box.isOccupied() && !box.isFinish() && !box.isStart()) {
 			Image image = new Image(getClass().getResourceAsStream("/data/Caja1.png"));
 			label.setGraphic(new ImageView(image));
-		} else if (box.isStart()) {
-			label.setStyle("-fx-background-color: black;");
-		} else if (box.isFinish()) {
-			label.setStyle("-fx-background-color: blue;");
 		} else {
 			Image image = new Image(getClass().getResourceAsStream("/data/Pasto1.png"));
 			label.setGraphic(new ImageView(image));
 		}
 	}
-
-	@Override
-	public void handle(KeyEvent event) {
-		System.out.println("Barrios es guay");
-		
-	}
-
 }
