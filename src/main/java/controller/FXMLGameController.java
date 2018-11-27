@@ -52,12 +52,10 @@ public class FXMLGameController implements Initializable {
 			
 			map.movePlayer(Player.UP);
 			refresh();
-			System.out.println("Pa arriba");
 		} else if (event.getCode() == KeyCode.DOWN) {
 			
 			map.movePlayer(Player.DOWN);
 			refresh();
-			System.out.println("Pa arriba");
 
 		} else if (event.getCode() == KeyCode.LEFT) {
 			
@@ -113,17 +111,17 @@ public class FXMLGameController implements Initializable {
 			Image image = new Image(getClass().getResourceAsStream(path));
 			label.setGraphic(new ImageView(image));
 		} else if (!box.isBreakable() && box.isOccupied() && !box.isFinish() && !box.isStart()) {
-			Image image = new Image(getClass().getResourceAsStream("/data/Bloque.jpg"));
+			Image image = new Image(getClass().getResourceAsStream("/data/Bloque1.png"));
 			label.setGraphic(new ImageView(image));
 		} else if (box.isBreakable() && box.isOccupied() && !box.isFinish() && !box.isStart()) {
-			Image image = new Image(getClass().getResourceAsStream("/data/Caja.jpg"));
+			Image image = new Image(getClass().getResourceAsStream("/data/Caja1.png"));
 			label.setGraphic(new ImageView(image));
 		} else if (box.isStart()) {
 			label.setStyle("-fx-background-color: black;");
 		} else if (box.isFinish()) {
 			label.setStyle("-fx-background-color: blue;");
 		} else {
-			Image image = new Image(getClass().getResourceAsStream("/data/Pasto.jpg"));
+			Image image = new Image(getClass().getResourceAsStream("/data/Pasto1.png"));
 			label.setGraphic(new ImageView(image));
 		}
 	}
