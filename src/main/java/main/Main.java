@@ -18,10 +18,12 @@ public class Main extends Application{
 		primaryStage.setTitle("Bomberman");
 		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/data/bomb.png")));
 		primaryStage.setResizable(false);
+		
 		primaryStage.show();
 		
 	}
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }

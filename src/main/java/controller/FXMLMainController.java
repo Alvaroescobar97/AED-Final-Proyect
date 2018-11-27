@@ -5,12 +5,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -41,7 +43,14 @@ public class FXMLMainController implements Initializable {
 
 			Scene gameScene = new Scene(gameViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
+			
+			gameScene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+				public void handle(KeyEvent event) {
+					System.out.println("Barrios es guay");
+				}
+			});
+			
+			
 			window.setScene(gameScene);
 			window.alwaysOnTopProperty();
 			window.show();

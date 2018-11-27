@@ -100,9 +100,9 @@ public class Map {
 		boxes[1][0].setStart(true);
 		boxes[1][0].setBomberman(true);
 
-		boxes[12][COLUMNS - 1].setBreakable(false);
-		boxes[12][COLUMNS - 1].setOccupied(false);
-		boxes[12][COLUMNS - 1].setFinish(true);
+		boxes[11][COLUMNS - 1].setBreakable(false);
+		boxes[11][COLUMNS - 1].setOccupied(false);
+		boxes[11][COLUMNS - 1].setFinish(true);
 		
 		fillGraph();
 	}

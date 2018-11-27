@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +18,7 @@ import model.Box;
 import model.Map;
 import model.Player;
 
-public class FXMLGameController implements Initializable {
+public class FXMLGameController implements Initializable, EventHandler<KeyEvent> {
 
 	private Map map;
 
@@ -74,13 +75,7 @@ public class FXMLGameController implements Initializable {
 		map = new Map();
 		map.createLevelOne();
 		fillLabelMatrix();
-		refresh();	
-		
-		lbTime.setOnKeyPressed(
-				event -> {
-					System.out.println("Pirobos todos");
-				}
-		);
+		refresh();
 	}
 
 	public void refresh() {
@@ -124,6 +119,12 @@ public class FXMLGameController implements Initializable {
 			Image image = new Image(getClass().getResourceAsStream("/data/Pasto1.png"));
 			label.setGraphic(new ImageView(image));
 		}
+	}
+
+	@Override
+	public void handle(KeyEvent event) {
+		System.out.println("Barrios es guay");
+		
 	}
 
 }
