@@ -15,7 +15,7 @@ import java.util.Set;
  * the AED course implemented with the adjacency matrix representation of the
  * graph.
  * 
- * @author Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa.
+ * @author Luis A. Rodriguez, ï¿½lvaro J. Escobar, Sebastiï¿½n Correa.
  * @version 1.0
  * @since 2018-11-26
  * @param <T>
@@ -47,6 +47,10 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 				adjMatrix[i][j] = INF;
 			}
 		}
+		
+		for(int i = 0; i < numVertex; i++) {
+			adjMatrix[i][i] = 0;
+		}
 
 		distMatrix = adjMatrix.clone();
 	}
@@ -73,7 +77,7 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 
 		int indexVertex1 = vertices.get(from.getValue());
 		int indexVertex2 = vertices.get(to.getValue());
-
+		
 		adjMatrix[indexVertex1][indexVertex2] = 1;
 		if (!isDirected)
 			adjMatrix[indexVertex2][indexVertex2] = 1;
@@ -111,6 +115,7 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		int indexVertex2 = vertices.get(to.getValue());
 
 		adjMatrix[indexVertex1][indexVertex2] = INF;
+		
 		if (!isWeighted)
 			adjMatrix[indexVertex2][indexVertex1] = INF;
 
@@ -185,7 +190,8 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 	}
 
 	@Override
-	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) throws IllegalArgumentException {
+	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) 
+			throws IllegalArgumentException {
 		return null;
 	}
 

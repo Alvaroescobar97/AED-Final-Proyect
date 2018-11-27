@@ -28,7 +28,7 @@ public class Player {
 	 */
 	public Player(String nickname) {
 		this.nickname = nickname;
-		this.imagePath = "";
+		this.imagePath = "/data/bomberman.jpg";
 	}
 	
 	public String getImage() {

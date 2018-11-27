@@ -4,7 +4,7 @@ package model;
  * Box class, represents either a wall or a breakable block, it also represents
  * a space.
  * 
- * @author Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa.
+ * @author Luis A. Rodriguez, ï¿½lvaro J. Escobar, Sebastiï¿½n Correa.
  * @version 1.0
  * @since 2018-11-26
  */
@@ -109,6 +109,11 @@ public class Box {
 	 */
 	public void setFinish(boolean finish) {
 		this.finish = finish;
+	}
+	
+	public String toString() {
+		if(!isOccupied()) return "No Esta ocupado";
+		return "Esta ocupado";
 	}
 
 }

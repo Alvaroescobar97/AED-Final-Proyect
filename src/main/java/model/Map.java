@@ -30,6 +30,13 @@ public class Map {
 	 */
 	public Map() {
 		this.boxes = new Box[ROWS][COLUMNS];
+		
+		for(int i = 0; i < boxes.length; i++) {
+			for(int j = 0;  j < boxes[0].length; j++) {
+				boxes[i][j] =  new Box(false, false);
+			}
+		}
+		
 		this.bomberman = new Player("Bomber");
 		random = new Random();
 	}
@@ -84,35 +91,51 @@ public class Map {
 		boxes[1][0].setOccupied(false);
 		boxes[1][0].setStart(true);
 
-		boxes[13][COLUMNS - 1].setBreakable(false);
-		boxes[13][COLUMNS - 1].setOccupied(false);
-		boxes[13][COLUMNS - 1].setFinish(true);
+		boxes[12][COLUMNS - 1].setBreakable(false);
+		boxes[12][COLUMNS - 1].setOccupied(false);
+		boxes[12][COLUMNS - 1].setFinish(true);
 		fillGraph();
 	}
 	
 	public void fillGraph() {
-		this.graph = new GraphMatrix<Box>(12, false, false);
+		this.graph = new GraphMatrix<Box>(169,false, false);
+		
+		for(int i = 0; i < boxes.length; i++) {
+			for(int j = 0; j < boxes[0].length; j++) {
+				graph.addVertex(boxes[i][j]);
+			}
+		}
 		
 		for(int i = 1; i < boxes.length-1; i++) {
 			for(int j = 1; j < boxes[0].length-1; j++) {
 				
-				Box from =  boxes[i][j];
-				Vertex<Box> v1 = new Vertex<Box>(from);
+				Vertex<Box> v1  = graph.getVertex(boxes[i][j]);
 				
-				graph.addVertex(from);
-				if(boxes[i-1][j].isOccupied() && !boxes[i-1][j].isBreakable()) 
-					graph.addEdge(v1, new Vertex<Box>(boxes[i-1][j]));
+				if(boxes[i-1][j].isOccupied() && !boxes[i-1][j].isBreakable()) {
+					Vertex<Box> v2 = graph.getVertex(boxes[i-1][j]);
+					graph.addEdge(v1, v2);
+				}
+					
 				
-				if(boxes[i][j+1].isOccupied() && !boxes[i][j+1].isBreakable()) 
-					graph.addEdge(v1, new Vertex<Box>(boxes[i][j+1]));
+				if(boxes[i][j+1].isOccupied() && !boxes[i][j+1].isBreakable()) {
+					Vertex<Box> v2 = graph.getVertex(boxes[i][j+1]);
+					graph.addEdge(v1, v2);
+				}
 				
-				if(boxes[i+1][j].isOccupied() && !boxes[i+1][j].isBreakable()) 
-					graph.addEdge(v1, new Vertex<Box>(boxes[i+1][j]));
+				if(boxes[i+1][j].isOccupied() && !boxes[i+1][j].isBreakable()) {
+					Vertex<Box> v2 = graph.getVertex(boxes[i+1][j]);
+					graph.addEdge(v1, v2);
+				}
+					
 				
-				if(boxes[i][j-1].isOccupied() && !boxes[i][j-1].isBreakable()) 
-					graph.addEdge(v1, new Vertex<Box>(boxes[i][j-1]));
+				if(boxes[i][j-1].isOccupied() && !boxes[i][j-1].isBreakable()) {
+					Vertex<Box> v2 = graph.getVertex(boxes[i][j-1]);
+					graph.addEdge(v1, v2);
+				}
+					
 			}
 		}
+		
 		
 		
 	}
@@ -141,9 +164,9 @@ public class Map {
 			}
 		}
 
-		boxes[13][0].setBreakable(false);
-		boxes[13][0].setOccupied(false);
-		boxes[13][0].setStart(true);
+		boxes[12][0].setBreakable(false);
+		boxes[12][0].setOccupied(false);
+		boxes[12][0].setStart(true);
 
 		boxes[1][COLUMNS - 1].setBreakable(false);
 		boxes[1][COLUMNS - 1].setOccupied(false);

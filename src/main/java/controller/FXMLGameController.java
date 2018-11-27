@@ -48,10 +48,7 @@ public class FXMLGameController implements Initializable{
 		 	case RIGHT: 
 		 		map.movePlayer(Player.RIGHT);
 		 		break;
-		 }
-		 
-		 
-		 
+		 } 
 	 }
 
 
@@ -59,6 +56,10 @@ public class FXMLGameController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		map =  new Map();
 		map.createLevelOne();
+		//fillGui();
+	}
+	
+	public void fillGui(){
 		
 	}
 	 
