@@ -59,6 +59,13 @@ public class FXMLGameController implements Initializable {
 		} else if (event.equals("RIGHT")) {
 			map.movePlayer(Player.RIGHT);
 			refresh();
+		}else if(event.equals("SPACE")) {
+			String temp = map.boom();
+			refresh();
+			//temporizador
+			
+			map.getBomberman().setImage(temp);
+			refresh();
 		}
 	}
 

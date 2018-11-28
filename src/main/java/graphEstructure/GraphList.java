@@ -548,10 +548,11 @@ public class GraphList<T> implements GraphInterface<T> {
 	 * vertexes.
 	 */
 	@Override
-	public void dijkstra(Vertex<T> startVertex) throws IllegalArgumentException {
-		if (!adjList.containsKey(startVertex))
-			throw new IllegalArgumentException();
-
+	public int dijkstra(Vertex<T> startVertex) throws IllegalArgumentException {
+		if (!adjList.containsKey(startVertex)) throw new IllegalArgumentException();
+		
+		ArrayList<T> vertexVisited = new ArrayList<T>();
+		
 		initializeSingleSource(startVertex);
 		Queue<Vertex<T>> priorityQ = new PriorityQueue<>(new VertexWeightComparator<Vertex<T>>());
 		priorityQ.addAll(adjList.keySet());
@@ -559,7 +560,8 @@ public class GraphList<T> implements GraphInterface<T> {
 
 		while (!priorityQ.isEmpty()) {
 			Vertex<T> tempVertex = priorityQ.poll();
-
+			vertexVisited.add(tempVertex.getValue());
+			
 			if (!vertexSet.contains(tempVertex)) {
 				for (Edge<T> tempEdge : adjList.get(tempVertex)) {
 					relax(tempVertex, tempEdge.endVertex());
@@ -567,6 +569,8 @@ public class GraphList<T> implements GraphInterface<T> {
 				vertexSet.add(tempVertex);
 			}
 		}
+		
+		return vertexVisited.size() -1;
 	}
 
 	/**

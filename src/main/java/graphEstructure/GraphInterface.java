@@ -24,7 +24,7 @@ public interface GraphInterface<T> {
 	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) throws IllegalArgumentException;
 	public void bfs(Vertex<T> startVertex);
 	public void dfs();
-	public void dijkstra(Vertex<T> startVertex);
+	public int dijkstra(Vertex<T> startVertex);
 	public boolean bellmanFord(Vertex<T> starVertex);
 	public void initializeSingleSource(Vertex<T> vertex);
 	public void relax(Vertex<T> start, Vertex<T> finish);

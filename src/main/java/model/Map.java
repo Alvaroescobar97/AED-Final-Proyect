@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-import graphEstructure.GraphMatrix;
+import graphEstructure.GraphList;
 import graphEstructure.Vertex;
 
 /**
@@ -20,7 +20,7 @@ public class Map {
 	public static final int COLUMNS = 13;
 
 	private Box[][] boxes;
-	private GraphMatrix<Box> graph;
+	private GraphList<Box> graph;
 	private Player bomberman;
 	private Random random;
 
@@ -105,6 +105,7 @@ public class Map {
 		boxes[11][COLUMNS - 1].setFinish(true);
 
 		fillGraph();
+		System.out.println(graph.dijkstra(graph.getVertex(boxes[1][0])) + "");
 	}
 
 	/**
@@ -112,7 +113,7 @@ public class Map {
 	 * created as a matrix of boxes.
 	 */
 	public void fillGraph() {
-		this.graph = new GraphMatrix<Box>(169, false, false);
+		this.graph = new GraphList<Box>(false, false);
 
 		for (int i = 0; i < boxes.length; i++) {
 			for (int j = 0; j < boxes[0].length; j++) {
@@ -281,58 +282,65 @@ public class Map {
 	 */
 	public void movePlayer(int direction) {
 		
-		if(direction == Player.UP) {
-			bomberman.setImage("/data/Bomber_Back2.png");
-		}else if(direction == Player.DOWN) {
-			bomberman.setImage("/data/Bomber_Front2.png");
-		}else if(direction == Player.RIGHT) {
-			bomberman.setImage("/data/Bomber_Right2.png");
-		}else if(direction == Player.LEFT) {
-			bomberman.setImage("/data/Bomber_Left2.png");
-		}
+		if(direction == Player.UP) bomberman.setImage("/data/Bomber_Back2.png");
+		else if(direction == Player.DOWN) bomberman.setImage("/data/Bomber_Front2.png");
+		else if(direction == Player.RIGHT) bomberman.setImage("/data/Bomber_Right2.png");
+		else if(direction == Player.LEFT) bomberman.setImage("/data/Bomber_Left2.png");
 		
-		
-		if (direction == Player.UP && !boxes[bomberman.getI() - 1][bomberman.getJ()].isOccupied()) {
-			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
-			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
+		try {
+			if (direction == Player.UP && !boxes[bomberman.getI() - 1][bomberman.getJ()].isOccupied()) {
+				boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+				boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 
-			bomberman.setI(bomberman.getI() - 1);
-			bomberman.setSteps(bomberman.getSteps() + 1);
+				bomberman.setI(bomberman.getI() - 1);
+				bomberman.setSteps(bomberman.getSteps() + 1);
 
-			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
-			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
+				boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+				boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 
-		} else if (direction == Player.DOWN && !boxes[bomberman.getI() + 1][bomberman.getJ()].isOccupied()) {
-			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
-			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
+			} else if (direction == Player.DOWN && !boxes[bomberman.getI() + 1][bomberman.getJ()].isOccupied()) {
+				boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+				boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 
-			bomberman.setI(bomberman.getI() + 1);
-			bomberman.setSteps(bomberman.getSteps() + 1);
+				bomberman.setI(bomberman.getI() + 1);
+				bomberman.setSteps(bomberman.getSteps() + 1);
 
-			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
-			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
+				boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+				boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 
-		} else if (direction == Player.LEFT && !boxes[bomberman.getI()][bomberman.getJ() - 1].isOccupied()) {
-			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
-			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
+			} else if (direction == Player.LEFT && !boxes[bomberman.getI()][bomberman.getJ() - 1].isOccupied()) {
+				boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+				boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 
-			bomberman.setJ(bomberman.getJ() - 1);
-			bomberman.setSteps(bomberman.getSteps() + 1);
+				bomberman.setJ(bomberman.getJ() - 1);
+				bomberman.setSteps(bomberman.getSteps() + 1);
 
-			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
-			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
+				boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+				boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 
-		} else if (direction == Player.RIGHT && !boxes[bomberman.getI()][bomberman.getJ() + 1].isOccupied()) {
+			} else if (direction == Player.RIGHT && !boxes[bomberman.getI()][bomberman.getJ() + 1].isOccupied()) {
+				boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
+				boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 
-			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
-			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
+				bomberman.setJ(bomberman.getJ() + 1);
+				bomberman.setSteps(bomberman.getSteps() + 1);
 
-			bomberman.setJ(bomberman.getJ() + 1);
-			bomberman.setSteps(bomberman.getSteps() + 1);
-
-			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
-			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
+				boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
+				boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
+				
+			}
+		} catch (Exception e) {
 			
 		}
+	}
+	
+	public String boom() {
+		int x = bomberman.getI();
+		int y = bomberman.getJ();
+		String tempPath = bomberman.getImage();
+		
+		bomberman.setImage("/data/Bomba1.png");
+		
+		return tempPath;
 	}
 }

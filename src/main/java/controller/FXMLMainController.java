@@ -46,15 +46,15 @@ public class FXMLMainController implements Initializable {
 			Scene gameScene = new Scene(root);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			
+			window.setScene(gameScene);
+			window.alwaysOnTopProperty();
+			window.show();
+			
 			gameScene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 				public void handle(KeyEvent event) {
 					controller.movePlayer(event.getCode().toString());
 				}
 			});
-			
-			window.setScene(gameScene);
-			window.alwaysOnTopProperty();
-			window.show();
 			
 		} catch (IOException e) {
 			e.printStackTrace();

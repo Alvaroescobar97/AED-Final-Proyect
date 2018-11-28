@@ -423,10 +423,10 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 	 * vertexes.
 	 */
 	@Override
-	public void dijkstra(Vertex<T> startVertex) {
+	public int dijkstra(Vertex<T> startVertex) {
 		ShortestPath sp = new ShortestPath();
 		int src = vertices.get(startVertex.getValue());
-		sp.dijkstra(distMatrix, src);
+		return sp.dijkstra(distMatrix, src);
 	}
 
 	/**
@@ -610,10 +610,11 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 			return min_index;
 		}
 
-		private void dijkstra(int[][] graph, int src) {
+		private int dijkstra(int[][] graph, int src) {
 			int[] dist = new int[listVertex.size()];
 			boolean[] sptSet = new boolean[listVertex.size()];
-
+			int minSteps = 0;
+			
 			for (int i = 0; i < listVertex.size(); i++) {
 				dist[i] = INF;
 				sptSet[i] = false;
@@ -629,11 +630,12 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 						dist[v] = dist[u] + graph[u][v];
 						listVertex.get(v).setD(dist[u] + graph[u][v]);
 						listVertex.get(v).setPred(listVertex.get(u));
+						if(sptSet[v] == true) minSteps++;
 					}
 				}
 			}
 			distMatrix[src] = dist;
-
+			return minSteps;
 		}
 
 		private boolean bellmanford(int[][] graph, int src) {
