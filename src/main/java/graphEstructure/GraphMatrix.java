@@ -15,7 +15,7 @@ import java.util.Set;
  * the AED course implemented with the adjacency matrix representation of the
  * graph.
  * 
- * @author Luis A. Rodriguez, �lvaro J. Escobar, Sebasti�n Correa.
+ * @author Luis A. Rodriguez, Alvaro J. Escobar, Sebastian Correa.
  * @version 1.0
  * @since 2018-11-26
  * @param <T>

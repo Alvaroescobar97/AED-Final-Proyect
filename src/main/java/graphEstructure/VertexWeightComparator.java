@@ -5,7 +5,7 @@ import java.util.Comparator;
 /**
  * VertexWeightComparator class, used only to compare a pair of vertexes.
  * 
- * @author Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa.
+ * @author Luis A. Rodriguez, Alvaro J. Escobar, Sebastian Correa.
  * @version 1.0
  * @since 2018-11-26
  * @param <T>

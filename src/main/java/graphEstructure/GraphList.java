@@ -13,7 +13,7 @@ import java.util.Set;
  * the AED course implemented with the adjacency list representation of the
  * graph.
  * 
- * @author Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa.
+ * @author Luis A. Rodriguez, Alvaro J. Escobar, Sebastian Correa.
  * @version 1.0
  * @since 2018-11-26
  * @param <T>
@@ -29,6 +29,15 @@ public class GraphList<T> implements GraphInterface<T> {
 	private Vertex<T> refVertex;
 	private int time;
 
+	/**
+	 * This is the Graph constructor, represented as an Adjacency list. The graph
+	 * can be directed and weighted.
+	 * 
+	 * @param isDirected
+	 *            this parameter specifies if the graph has directed edges.
+	 * @param isWeighted
+	 *            this parameter specifies if the graph has weighted edges.
+	 */
 	public GraphList(boolean isDirected, boolean isWeighted) {
 		adjList = new HashMap<>();
 		numVertices = 0;
@@ -37,11 +46,27 @@ public class GraphList<T> implements GraphInterface<T> {
 		this.isWeighted = isWeighted;
 	}
 
+	/**
+	 * This method uses another method of this same class to add a vertex.
+	 */
 	@Override
 	public void addVertex(T element) {
 		addVertex(new Vertex<T>(element));
 	}
 
+	/**
+	 * This method is used by another method of this same class. This method adds a
+	 * vertex to the list representation of the graph.
+	 * 
+	 * @param vertex
+	 *            the generic vertex to add.
+	 * 
+	 *            <b>pre:</b> vertex != null <b>post:</b> the vertex is succesfully
+	 *            added, if the graph doesn't contain it.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the vertex to add is already an existent vertex of the graph.
+	 */
 	public void addVertex(Vertex<T> vertex) throws IllegalArgumentException {
 		if (!adjList.containsKey(vertex)) {
 			this.adjList.put(vertex, new HashSet<Edge<T>>());
@@ -51,6 +76,9 @@ public class GraphList<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method uses another method of this same class to add an edge.
+	 */
 	@Override
 	public void addEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		if (adjList.containsKey(from) && adjList.containsKey(to)) {
@@ -64,6 +92,26 @@ public class GraphList<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method is used by another of this same class to add a weighted edge from
+	 * one starting vertex to an ending vertex.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends.
+	 * @param weight
+	 *            is the cost of using the edge.
+	 * 
+	 *            <b>pre:</b> from != null && to !=null <b>post:</b> the edge
+	 *            between the vertexes from and to is succesfully created with its
+	 *            weight, if from and to are vertexes of the graph.
+	 * 
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the edge isn't weighted or if the start and end vertexes
+	 *             doesn't exist.
+	 */
 	@Override
 	public void addEdge(Vertex<T> from, Vertex<T> to, int weight) throws IllegalArgumentException {
 		if (!isWeighted)
@@ -81,6 +129,20 @@ public class GraphList<T> implements GraphInterface<T> {
 
 	}
 
+	/**
+	 * This method removes a vertex from the graph.
+	 * 
+	 * @param vertex
+	 *            is the generic vertex that will be removed.
+	 * 
+	 *            <b>pre:</b> vertex != null <b>post:</b> the vertex is succesfully
+	 *            removed, if the graph contains it.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the parameter vertex isn't a vertex of the graph.
+	 * 
+	 * 
+	 */
 	public void removeVertex(Vertex<T> vertex) throws IllegalArgumentException {
 		if (adjList.containsKey(vertex)) {
 			for (Edge<T> edge : getEdges()) {
@@ -95,6 +157,16 @@ public class GraphList<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method removes an edge between two vertexes.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge to remove starts.
+	 * @param to
+	 *            is the generic vertex where the edge to remove ends. <b>pre:</b>
+	 *            from != null && to != null <b>post:</b> the vertex between the
+	 *            pair of vertexes from and to has been removed.
+	 */
 	@Override
 	public void removeEdge(Vertex<T> from, Vertex<T> to) {
 		if (adjList.containsKey(from) && adjList.containsKey(to)) {
@@ -110,6 +182,18 @@ public class GraphList<T> implements GraphInterface<T> {
 
 	}
 
+	/**
+	 * This method is used to get a vertex from the graph.
+	 * 
+	 * @param element
+	 *            is the generic element used as vertex.
+	 * 
+	 *            <b>pre:</b> element != null <b>post:</b> returns the vertex if the
+	 *            graph contains it.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the parameter vertex.
+	 */
 	@Override
 	public Vertex<T> getVertex(T element) throws IllegalArgumentException {
 
@@ -121,11 +205,27 @@ public class GraphList<T> implements GraphInterface<T> {
 		throw new IllegalArgumentException();
 	}
 
+	/**
+	 * This method returns all the vertexes from the graph.
+	 */
 	@Override
 	public Iterable<Vertex<T>> getVertices() {
 		return adjList.keySet();
 	}
 
+	/**
+	 * This method returns the edge between two vertexes.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends. <b>pre:</b> from !=
+	 *            null && to != null <b>post:</b> the method returns the edge
+	 *            between from and to if they are vertexes from the graph.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertexes from and to.
+	 */
 	@Override
 	public Edge<T> getEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		for (Edge<T> edge : adjList.get(from)) {
@@ -136,11 +236,37 @@ public class GraphList<T> implements GraphInterface<T> {
 		throw new IllegalArgumentException();
 	}
 
+	/**
+	 * This method returns the edges of a vertex.
+	 * 
+	 * @param vertex
+	 *            is the generic vertex where the starts. <b>pre:</b> vertex != null
+	 *            <b>post:</b> the method returns the edges that start in the vertex
+	 *            from.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertex.
+	 */
 	@Override
 	public Iterable<Edge<T>> getEdges(Vertex<T> vertex) throws IllegalArgumentException {
 		return adjList.get(vertex);
 	}
 
+	/**
+	 * This method returns the weight of a specific edge.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends.
+	 * 
+	 *            <b>pre:</b> from != null && to != null <b>post:</b> the method
+	 *            returns the weight of the edge, if the graph contains the vertexes
+	 *            from and to.
+	 * @return int the weight of the edge.
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertexes.
+	 */
 	@Override
 	public int getWeightEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		if (adjList.containsKey(from)) {
@@ -153,6 +279,22 @@ public class GraphList<T> implements GraphInterface<T> {
 		throw new IllegalArgumentException();
 	}
 
+	/**
+	 * This method is used to set or change the weight of an edge.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends.
+	 * 
+	 * @param weight
+	 *            is the value to set as weight of the edge.
+	 * 
+	 *            <b>pre:</b> from != null && to != null <b>post:</b> the weight of
+	 *            the edge is set or changed.
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertexes.
+	 */
 	@Override
 	public void setWeightEdge(Vertex<T> from, Vertex<T> to, int weight) throws IllegalArgumentException {
 		if (adjList.containsKey(from) && adjList.containsKey(to)) {
@@ -168,6 +310,18 @@ public class GraphList<T> implements GraphInterface<T> {
 		throw new IllegalArgumentException();
 	}
 
+	/**
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends.
+	 * 
+	 *            <b>pre:</b> from != null && to != null <b>post:</b> the method
+	 *            returns true if between the vertex from starts an edge that ends
+	 *            in the vertex to.
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertexes.
+	 */
 	@Override
 	public boolean isAdjacent(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		if (!adjList.containsKey(from) || !adjList.containsKey(to))
@@ -181,6 +335,9 @@ public class GraphList<T> implements GraphInterface<T> {
 		return false;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public Set<Vertex<T>> adjacentVertices(Vertex<T> vertex) throws IllegalArgumentException {
 		if (!adjList.containsKey(vertex))
@@ -195,6 +352,9 @@ public class GraphList<T> implements GraphInterface<T> {
 		return adjVertices;
 	}
 
+	/**
+	 * This method returns the edges of the graph as an ArrayList.
+	 */
 	@Override
 	public Iterable<Edge<T>> getEdges() {
 		ArrayList<Edge<T>> edgesList = new ArrayList<Edge<T>>();
@@ -208,6 +368,9 @@ public class GraphList<T> implements GraphInterface<T> {
 		return edgesList;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) throws IllegalArgumentException {
 
@@ -226,6 +389,10 @@ public class GraphList<T> implements GraphInterface<T> {
 		return path;
 	}
 
+	/**
+	 * This method returns the adjacencies of every vertex. The method returns the
+	 * adjacency list as a String.
+	 */
 	@Override
 	public String toString() {
 		String data = "";
@@ -247,26 +414,55 @@ public class GraphList<T> implements GraphInterface<T> {
 		return refVertex;
 	}
 
+	/**
+	 * This method returns the number of vertexes of the graph.
+	 * 
+	 * @return int the number of vertexes of the graph.
+	 */
 	public int getNumVertices() {
 		return numVertices;
 	}
 
+	/**
+	 * This method returns the number of edges of the graph
+	 * 
+	 * @return
+	 */
 	public int getNumEdges() {
 		return numEdges;
 	}
 
+	/**
+	 * This method returns the adjacency list.
+	 * 
+	 * @return HashMap the adjacency list.
+	 */
 	public HashMap<Vertex<T>, Set<Edge<T>>> getAdjList() {
 		return adjList;
 	}
 
+	/**
+	 * This method returns the state of the direction of the graph.
+	 * 
+	 * @return boolean the method returns true if the graph is directed.
+	 */
 	public boolean isDirected() {
 		return isDirected;
 	}
 
+	/**
+	 * This method returns the state of the edges of the graph.
+	 * 
+	 * @return boolean the method returns true if the graph has weighted edges.
+	 */
 	public boolean isWeighted() {
 		return isWeighted;
 	}
 
+	/**
+	 * This method explores all of the adjacencies of a vertex before exploring the
+	 * adjacencies of the next level.
+	 */
 	@Override
 	public void bfs(Vertex<T> startVertex) throws IllegalArgumentException {
 		if (!adjList.containsKey(startVertex))
@@ -307,6 +503,10 @@ public class GraphList<T> implements GraphInterface<T> {
 
 	}
 
+	/**
+	 * This method explores from one vertex considered the root vertex as far as
+	 * possible before backtracking.
+	 */
 	@Override
 	public void dfs() {
 		for (Vertex<T> u : getVertices()) {
@@ -321,6 +521,13 @@ public class GraphList<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method is used by another method of this same class. It's used to mark
+	 * which vertexes are visited.
+	 * 
+	 * @param u
+	 *            the visited vertex.
+	 */
 	private void dfsVisit(Vertex<T> u) {
 		time++;
 		u.setD(time);
@@ -339,6 +546,10 @@ public class GraphList<T> implements GraphInterface<T> {
 		u.setF(time);
 	}
 
+	/**
+	 * This method is used to find the shortest path from one vertex to the other
+	 * vertexes.
+	 */
 	@Override
 	public void dijkstra(Vertex<T> startVertex) throws IllegalArgumentException {
 		if (!adjList.containsKey(startVertex))
@@ -361,6 +572,10 @@ public class GraphList<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method is used to find the shortest path from one vertex to other
+	 * vertexes, it can work with negative weighted edges.
+	 */
 	@Override
 	public boolean bellmanFord(Vertex<T> startVertex) throws IllegalArgumentException {
 		if (!adjList.containsKey(startVertex))
@@ -393,6 +608,9 @@ public class GraphList<T> implements GraphInterface<T> {
 		vertex.setD(0);
 	}
 
+	/**
+	 * This method is used by other methods that find the shortest path.
+	 */
 	@Override
 	public void relax(Vertex<T> start, Vertex<T> finish) {
 		double tempDistance = start.getD() + getEdge(start, finish).getWeight();
@@ -403,6 +621,9 @@ public class GraphList<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method is used to find the minimum spanning tree for a connected graph.
+	 */
 	@Override
 	public void prim(Vertex<T> vertex) {
 		for (Vertex<T> u : getVertices()) {
@@ -434,13 +655,22 @@ public class GraphList<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method is used to find the minimum spanning tree for a connected or
+	 * disconnected graph.
+	 */
 	@Override
 	public ArrayList<Edge<T>> kruskal() {
 		return null;
 	}
 
+	/**
+	 * This method is used to find the shortest path from any vertex to any other
+	 * vertex.
+	 */
 	@Override
 	public int[][] floydWarshall() {
 		return null;
 	}
-}
+}// * <b>pre:</b> vertex != null
+	// * <b>post:</b> the vertex is succesfully removed, if the graph contains it.

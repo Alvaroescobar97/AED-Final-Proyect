@@ -3,7 +3,7 @@ package model;
 /**
  * Player class, represents the main character of the game, Bomber.
  * 
- * @author Luis A. Rodriguez, �lvaro J. Escobar, Sebasti�n Correa.
+ * @author Luis A. Rodriguez, Alvaro J. Escobar, Sebastian Correa.
  * @version 1.0
  * @since 2018-11-26
  */

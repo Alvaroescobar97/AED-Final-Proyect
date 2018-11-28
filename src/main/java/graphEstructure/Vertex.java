@@ -3,7 +3,7 @@ package graphEstructure;
 /**
  * Vertex class, represents a generic vertex of the graph.
  * 
- * @author Luis A. Rodriguez, Álvaro J. Escobar, Sebastián Correa.
+ * @author Luis A. Rodriguez, Alvaro J. Escobar, Sebastian Correa.
  * @version 1.0
  * @since 2018-11-26
  * @param <T>

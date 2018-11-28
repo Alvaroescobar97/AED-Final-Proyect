@@ -4,7 +4,7 @@ package model;
  * Box class, represents either a wall or a breakable block, it also represents
  * a space.
  * 
- * @author Luis A. Rodriguez, �lvaro J. Escobar, Sebasti�n Correa.
+ * @author Luis A. Rodriguez, Alvaro J. Escobar, Sebastian Correa.
  * @version 1.0
  * @since 2018-11-26
  */

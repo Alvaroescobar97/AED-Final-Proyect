@@ -9,7 +9,7 @@ import graphEstructure.Vertex;
  * Map class, contains the classic labyrinth-type map of Bomberman and the main
  * character of the game, the Bomber.
  * 
- * @author Luis A. Rodriguez, �lvaro J. Escobar, Sebasti�n Correa.
+ * @author Luis A. Rodriguez, Alvaro J. Escobar, Sebastian Correa.
  * @version 1.0
  * @since 2018-11-26
  */
