@@ -272,7 +272,18 @@ public class Map {
 	 *            the direction in which the player moves.
 	 */
 	public void movePlayer(int direction) {
-		showBoxes();
+		
+		if(direction == Player.UP) {
+			bomberman.setImage("/data/Bomber_Back2.png");
+		}else if(direction == Player.DOWN) {
+			bomberman.setImage("/data/Bomber_Front2.png");
+		}else if(direction == Player.RIGHT) {
+			bomberman.setImage("/data/Bomber_Right2.png");
+		}else if(direction == Player.LEFT) {
+			bomberman.setImage("/data/Bomber_Left2.png");
+		}
+		
+		
 		if (direction == Player.UP && !boxes[bomberman.getI() + 1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
@@ -282,8 +293,6 @@ public class Map {
 
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
-
-			bomberman.setImage("/data/Bomber_Back2.png");
 
 		} else if (direction == Player.DOWN && !boxes[bomberman.getI() - 1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
@@ -295,7 +304,6 @@ public class Map {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 
-			bomberman.setImage("/data/Bomber_Front2.png");
 		} else if (direction == Player.LEFT && !boxes[bomberman.getI()][bomberman.getJ() - 1].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
@@ -306,7 +314,6 @@ public class Map {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 
-			bomberman.setImage("/data/Bomber_Left2.png");
 		} else if (direction == Player.RIGHT && !boxes[bomberman.getI()][bomberman.getJ() + 1].isOccupied()) {
 
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
@@ -317,20 +324,7 @@ public class Map {
 
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
-
-			bomberman.setImage("/data/Bomber_Right2.png");
+			
 		}
 	}
-
-	/**
-	 * This method shows the box matrix (the map) as a String.
-	 */
-	public void showBoxes() {
-		for (int i = 0; i < ROWS; i++) {
-			for (int j = 0; j < ROWS; j++) {
-				System.out.println("[" + i + "]" + "[" + j + "] " + boxes[i][j].toString());
-			}
-		}
-	}
-
 }

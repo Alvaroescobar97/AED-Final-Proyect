@@ -41,7 +41,8 @@ public class FXMLMainController implements Initializable {
 		AnchorPane gameViewParent;
 		
 		try {
-			gameViewParent = (AnchorPane) loader.load(getClass().getResource("/view/GameView.fxml").openStream());
+			gameViewParent = (AnchorPane) 
+					loader.load(getClass().getResource("/view/GameView.fxml").openStream());
 
 			Scene gameScene = new Scene(gameViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -68,7 +69,8 @@ public class FXMLMainController implements Initializable {
 
 		AnchorPane instructionsViewParent;
 		try {
-			instructionsViewParent = (AnchorPane) loader.load(getClass().getResource("/view/Instructions.fxml").openStream());
+			instructionsViewParent = (AnchorPane) 
+					loader.load(getClass().getResource("/view/Instructions.fxml").openStream());
 
 			Scene instructionsScene = new Scene(instructionsViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

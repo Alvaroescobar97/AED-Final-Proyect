@@ -5,11 +5,9 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import model.Box;
 import model.Map;
@@ -42,7 +40,12 @@ public class FXMLGameController implements Initializable {
 	@FXML
 	private Label lbNumMaxSteps;
 	
-
+	
+	public FXMLGameController() {
+		this.map = new Map();
+		this.gameGrid = new GridPane();
+	}
+	
 	public void movePlayer(String event) {
 		if (event.equals("UP")) {
 			map.movePlayer(Player.UP);
@@ -61,8 +64,7 @@ public class FXMLGameController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		map = new Map();
-		map.createLevelOne();
+		this.map.createLevelOne();
 		fillLabelMatrix();
 		refresh();
 	}
@@ -71,7 +73,7 @@ public class FXMLGameController implements Initializable {
 		gameGrid.getChildren().clear();
 		for (int i = 0; i < Map.ROWS; i++) {
 			for (int j = 0; j < Map.ROWS; j++) {
-				labelImage(labels[i][j], i, j);
+				this.labelImage(labels[i][j], i, j);
 				gameGrid.add(labels[i][j], j, i);
 			}
 		}
