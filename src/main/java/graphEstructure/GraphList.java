@@ -240,9 +240,9 @@ public class GraphList<T> implements GraphInterface<T> {
 	 * This method returns the edges of a vertex.
 	 * 
 	 * @param vertex
-	 *            is the generic vertex where the starts. <b>pre:</b> vertex != null
-	 *            <b>post:</b> the method returns the edges that start in the vertex
-	 *            from.
+	 *            is the generic vertex where the edge starts. <b>pre:</b> vertex !=
+	 *            null <b>post:</b> the method returns the edges that start in the
+	 *            parameter vertex.
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if the graph doesn't contain the vertex.
@@ -335,9 +335,6 @@ public class GraphList<T> implements GraphInterface<T> {
 		return false;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public Set<Vertex<T>> adjacentVertices(Vertex<T> vertex) throws IllegalArgumentException {
 		if (!adjList.containsKey(vertex))

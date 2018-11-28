@@ -18,7 +18,7 @@ public class Map {
 
 	public static final int ROWS = 13;
 	public static final int COLUMNS = 13;
-	
+
 	private Box[][] boxes;
 	private GraphMatrix<Box> graph;
 	private Player bomberman;
@@ -30,13 +30,13 @@ public class Map {
 	 */
 	public Map() {
 		this.boxes = new Box[ROWS][COLUMNS];
-		
-		for(int i = 0; i < boxes.length; i++) {
-			for(int j = 0;  j < boxes[0].length; j++) {
-				boxes[i][j] =  new Box(false, false);
+
+		for (int i = 0; i < boxes.length; i++) {
+			for (int j = 0; j < boxes[0].length; j++) {
+				boxes[i][j] = new Box(false, false);
 			}
 		}
-		
+
 		this.bomberman = new Player("Bomber");
 		random = new Random();
 	}
@@ -103,51 +103,51 @@ public class Map {
 		boxes[11][COLUMNS - 1].setBreakable(false);
 		boxes[11][COLUMNS - 1].setOccupied(false);
 		boxes[11][COLUMNS - 1].setFinish(true);
-		
+
 		fillGraph();
 	}
-	
+
+	/**
+	 * This method fills the graph with the information of the map originally
+	 * created as a matrix of boxes.
+	 */
 	public void fillGraph() {
-		this.graph = new GraphMatrix<Box>(169,false, false);
-		
-		for(int i = 0; i < boxes.length; i++) {
-			for(int j = 0; j < boxes[0].length; j++) {
+		this.graph = new GraphMatrix<Box>(169, false, false);
+
+		for (int i = 0; i < boxes.length; i++) {
+			for (int j = 0; j < boxes[0].length; j++) {
 				graph.addVertex(boxes[i][j]);
 			}
 		}
-		
-		for(int i = 1; i < boxes.length-1; i++) {
-			for(int j = 1; j < boxes[0].length-1; j++) {
-				
-				Vertex<Box> v1  = graph.getVertex(boxes[i][j]);
-				
-				if(boxes[i-1][j].isOccupied() && !boxes[i-1][j].isBreakable()) {
-					Vertex<Box> v2 = graph.getVertex(boxes[i-1][j]);
+
+		for (int i = 1; i < boxes.length - 1; i++) {
+			for (int j = 1; j < boxes[0].length - 1; j++) {
+
+				Vertex<Box> v1 = graph.getVertex(boxes[i][j]);
+
+				if (boxes[i - 1][j].isOccupied() && !boxes[i - 1][j].isBreakable()) {
+					Vertex<Box> v2 = graph.getVertex(boxes[i - 1][j]);
 					graph.addEdge(v1, v2);
 				}
-					
-				
-				if(boxes[i][j+1].isOccupied() && !boxes[i][j+1].isBreakable()) {
-					Vertex<Box> v2 = graph.getVertex(boxes[i][j+1]);
+
+				if (boxes[i][j + 1].isOccupied() && !boxes[i][j + 1].isBreakable()) {
+					Vertex<Box> v2 = graph.getVertex(boxes[i][j + 1]);
 					graph.addEdge(v1, v2);
 				}
-				
-				if(boxes[i+1][j].isOccupied() && !boxes[i+1][j].isBreakable()) {
-					Vertex<Box> v2 = graph.getVertex(boxes[i+1][j]);
+
+				if (boxes[i + 1][j].isOccupied() && !boxes[i + 1][j].isBreakable()) {
+					Vertex<Box> v2 = graph.getVertex(boxes[i + 1][j]);
 					graph.addEdge(v1, v2);
 				}
-					
-				
-				if(boxes[i][j-1].isOccupied() && !boxes[i][j-1].isBreakable()) {
-					Vertex<Box> v2 = graph.getVertex(boxes[i][j-1]);
+
+				if (boxes[i][j - 1].isOccupied() && !boxes[i][j - 1].isBreakable()) {
+					Vertex<Box> v2 = graph.getVertex(boxes[i][j - 1]);
 					graph.addEdge(v1, v2);
 				}
-					
+
 			}
 		}
-		
-		
-		
+
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class Map {
 					&& boxes[randomRow][randomColumn].isOccupied() == false
 					&& boxes[randomRow][randomColumn].isStart() == false
 					&& boxes[randomRow][randomColumn].isFinish() == false) {
-				
+
 				boxes[randomRow][randomColumn].setBreakable(true);
 				boxes[randomRow][randomColumn].setOccupied(true);
 				breakable++;
@@ -182,7 +182,7 @@ public class Map {
 		boxes[1][COLUMNS - 1].setBreakable(false);
 		boxes[1][COLUMNS - 1].setOccupied(false);
 		boxes[1][COLUMNS - 1].setFinish(true);
-		
+
 		fillGraph();
 	}
 
@@ -217,7 +217,7 @@ public class Map {
 		boxes[ROWS - 1][COLUMNS - 1].setBreakable(false);
 		boxes[ROWS - 1][COLUMNS - 1].setOccupied(false);
 		boxes[ROWS - 1][COLUMNS - 1].setFinish(true);
-		
+
 		fillGraph();
 	}
 
@@ -264,60 +264,70 @@ public class Map {
 		}
 	}
 
+	/**
+	 * This method is used to move the player, increasing the steps and changing the
+	 * direction of the character, if it is the case.
+	 * 
+	 * @param direction
+	 *            the direction in which the player moves.
+	 */
 	public void movePlayer(int direction) {
 		showBoxes();
-		if(direction ==  Player.UP && !boxes[bomberman.getI()+1][bomberman.getJ()].isOccupied()) {
+		if (direction == Player.UP && !boxes[bomberman.getI() + 1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
-			
-			bomberman.setI(bomberman.getI() +1);
-			bomberman.setSteps(bomberman.getSteps() +1);
-			
+
+			bomberman.setI(bomberman.getI() + 1);
+			bomberman.setSteps(bomberman.getSteps() + 1);
+
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
-			
+
 			bomberman.setImage("/data/Bomber_Back2.png");
-			
-		}else if(direction == Player.DOWN && !boxes[bomberman.getI()-1][bomberman.getJ()].isOccupied()) {
+
+		} else if (direction == Player.DOWN && !boxes[bomberman.getI() - 1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
-			
-			bomberman.setI(bomberman.getI() -1);
-			bomberman.setSteps(bomberman.getSteps() +1);
-			
+
+			bomberman.setI(bomberman.getI() - 1);
+			bomberman.setSteps(bomberman.getSteps() + 1);
+
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
-			
+
 			bomberman.setImage("/data/Bomber_Front2.png");
-		}else if(direction == Player.LEFT && !boxes[bomberman.getI()][bomberman.getJ() -1].isOccupied()) {
+		} else if (direction == Player.LEFT && !boxes[bomberman.getI()][bomberman.getJ() - 1].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
-			
-			bomberman.setJ(bomberman.getJ() -1);
-			bomberman.setSteps(bomberman.getSteps() +1);
-			
+
+			bomberman.setJ(bomberman.getJ() - 1);
+			bomberman.setSteps(bomberman.getSteps() + 1);
+
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
-			
+
 			bomberman.setImage("/data/Bomber_Left2.png");
-		}else if(direction == Player.RIGHT && !boxes[bomberman.getI()][bomberman.getJ() +1].isOccupied()) {
-			
+		} else if (direction == Player.RIGHT && !boxes[bomberman.getI()][bomberman.getJ() + 1].isOccupied()) {
+
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
-			
-			bomberman.setJ(bomberman.getJ() +1);
-			bomberman.setSteps(bomberman.getSteps() +1);
-			
+
+			bomberman.setJ(bomberman.getJ() + 1);
+			bomberman.setSteps(bomberman.getSteps() + 1);
+
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
-			
+
 			bomberman.setImage("/data/Bomber_Right2.png");
 		}
 	}
-	
+
+	/**
+	 * This method shows the box matrix (the map) as a String.
+	 */
 	public void showBoxes() {
-		for(int i = 0; i < ROWS; i++) {
-			for(int j = 0; j < ROWS; j++) {
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < ROWS; j++) {
 				System.out.println("[" + i + "]" + "[" + j + "] " + boxes[i][j].toString());
 			}
 		}

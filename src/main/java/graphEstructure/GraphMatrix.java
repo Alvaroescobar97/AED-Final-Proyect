@@ -33,6 +33,17 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 	private boolean isDirected;
 	private boolean isWeighted;
 
+	/**
+	 * This is the Graph constructor, represented as an Adjacency matrix. The graph
+	 * can be directed and weighted.
+	 * 
+	 * @param numVertex
+	 *            is the number of vertexes of the graph.
+	 * @param isDirected
+	 *            this parameter specifies if the graph has directed edges.
+	 * @param isWeighted
+	 *            this parameter specifies if the graph has weighted edges.
+	 */
 	public GraphMatrix(int numVertex, boolean isDirected, boolean isWeighted) {
 		this.numVertex = numVertex;
 		this.isDirected = isDirected;
@@ -47,20 +58,36 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 				adjMatrix[i][j] = INF;
 			}
 		}
-		
-		for(int i = 0; i < numVertex; i++) {
+
+		for (int i = 0; i < numVertex; i++) {
 			adjMatrix[i][i] = 0;
 		}
 
 		distMatrix = adjMatrix.clone();
 	}
 
+	/**
+	 * This method uses another method of this same class to add a vertex.
+	 */
 	@Override
 	public void addVertex(T element) {
 		Vertex<T> vertex = new Vertex<>(element);
 		addVertex(vertex);
 	}
 
+	/**
+	 * This method is used by another method of this same class. This method adds a
+	 * vertex to the list representation of the graph.
+	 * 
+	 * @param vertex
+	 *            the generic vertex to add.
+	 * 
+	 *            <b>pre:</b> vertex != null <b>post:</b> the vertex is succesfully
+	 *            added, if the graph doesn't contain it.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the vertex to add is already an existent vertex of the graph.
+	 */
 	private void addVertex(Vertex<T> vertex) throws IllegalArgumentException {
 		if (vertices.containsKey(vertex.getValue()))
 			throw new IllegalArgumentException("Vertex exist");
@@ -69,6 +96,9 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		index++;
 	}
 
+	/**
+	 * This method uses another method of this same class to add an edge.
+	 */
 	@Override
 	public void addEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		if (!vertices.containsKey(from.getValue()) || !vertices.containsKey(to.getValue())) {
@@ -77,12 +107,32 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 
 		int indexVertex1 = vertices.get(from.getValue());
 		int indexVertex2 = vertices.get(to.getValue());
-		
+
 		adjMatrix[indexVertex1][indexVertex2] = 1;
 		if (!isDirected)
 			adjMatrix[indexVertex2][indexVertex2] = 1;
 	}
 
+	/**
+	 * This method is used by another of this same class to add a weighted edge from
+	 * one starting vertex to an ending vertex.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends.
+	 * @param weight
+	 *            is the cost of using the edge.
+	 * 
+	 *            <b>pre:</b> from != null && to !=null <b>post:</b> the edge
+	 *            between the vertexes from and to is succesfully created with its
+	 *            weight, if from and to are vertexes of the graph.
+	 * 
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the edge isn't weighted or if the start and end vertexes
+	 *             doesn't exist.
+	 */
 	@Override
 	public void addEdge(Vertex<T> from, Vertex<T> to, int weight) throws IllegalArgumentException {
 		if (!isWeighted)
@@ -105,6 +155,19 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 
 	}
 
+	/**
+	 * This method removes an edge between two vertexes.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge to remove starts.
+	 * @param to
+	 *            is the generic vertex where the edge to remove ends. <b>pre:</b>
+	 *            from != null && to != null <b>post:</b> the vertex between the
+	 *            pair of vertexes from and to has been removed.
+	 * @throws IllegalArgumentException
+	 *             if the edge isn't weighted or if the start and end vertexes
+	 *             doesn't exist
+	 */
 	@Override
 	public void removeEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		if (!vertices.containsKey(from.getValue()) || !vertices.containsKey(to.getValue())) {
@@ -115,12 +178,24 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		int indexVertex2 = vertices.get(to.getValue());
 
 		adjMatrix[indexVertex1][indexVertex2] = INF;
-		
+
 		if (!isWeighted)
 			adjMatrix[indexVertex2][indexVertex1] = INF;
 
 	}
 
+	/**
+	 * This method is used to get a vertex from the graph.
+	 * 
+	 * @param element
+	 *            is the generic element used as vertex.
+	 * 
+	 *            <b>pre:</b> element != null <b>post:</b> returns the vertex if the
+	 *            graph contains it.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the parameter vertex.
+	 */
 	@Override
 	public Vertex<T> getVertex(T element) throws IllegalArgumentException {
 		if (vertices.containsKey(element))
@@ -128,16 +203,43 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		throw new IllegalArgumentException("Vertex not found");
 	}
 
+	/**
+	 * This method returns all the vertexes from the graph.
+	 */
 	@Override
 	public Iterable<Vertex<T>> getVertices() {
 		return this.listVertex;
 	}
 
+	/**
+	 * This method returns the edge between two vertexes.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends. <b>pre:</b> from !=
+	 *            null && to != null <b>post:</b> the method returns the edge
+	 *            between from and to if they are vertexes from the graph.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertexes from and to.
+	 */
 	@Override
 	public Edge<T> getEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		return null;
 	}
 
+	/**
+	 * This method returns the edges of a vertex.
+	 * 
+	 * @param vertex
+	 *            is the generic vertex where edge the starts. <b>pre:</b> vertex !=
+	 *            null <b>post:</b> the method returns the edges that start in the
+	 *            parameter vertex.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertex.
+	 */
 	@Override
 	public Iterable<Edge<T>> getEdges(Vertex<T> vertex) throws IllegalArgumentException {
 		ArrayList<Edge<T>> edges = new ArrayList<>();
@@ -150,16 +252,57 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		return edges;
 	}
 
+	/**
+	 * This method returns the weight of a specific edge.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends.
+	 * 
+	 *            <b>pre:</b> from != null && to != null <b>post:</b> the method
+	 *            returns the weight of the edge, if the graph contains the vertexes
+	 *            from and to.
+	 * @return int the weight of the edge.
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertexes.
+	 */
 	@Override
 	public int getWeightEdge(Vertex<T> from, Vertex<T> to) throws IllegalArgumentException {
 		return this.adjMatrix[vertices.get(from.getValue())][vertices.get(to.getValue())];
 	}
 
+	/**
+	 * This method is used to set or change the weight of an edge.
+	 * 
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends.
+	 * 
+	 * @param weight
+	 *            is the value to set as weight of the edge.
+	 * 
+	 *            <b>pre:</b> from != null && to != null <b>post:</b> the weight of
+	 *            the edge is set or changed.
+	 * @throws IllegalArgumentException
+	 *             if the graph doesn't contain the vertexes.
+	 */
 	@Override
 	public void setWeightEdge(Vertex<T> from, Vertex<T> to, int weight) throws IllegalArgumentException {
 		this.adjMatrix[vertices.get(from.getValue())][vertices.get(to.getValue())] = weight;
 	}
 
+	/**
+	 * @param from
+	 *            is the generic vertex where the edge starts.
+	 * @param to
+	 *            is the generic vertex where the edge ends.
+	 * 
+	 *            <b>pre:</b> from != null && to != null <b>post:</b> the method
+	 *            returns true if between the vertex from starts an edge that ends
+	 *            in the vertex to.
+	 */
 	@Override
 	public boolean isAdjacent(Vertex<T> from, Vertex<T> to) {
 		int indexVertex1 = vertices.get(from.getValue());
@@ -176,6 +319,9 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		return null;
 	}
 
+	/**
+	 * This method returns the edges of the graph as an ArrayList.
+	 */
 	@Override
 	public ArrayList<Edge<T>> getEdges() {
 		ArrayList<Edge<T>> edges = new ArrayList<>();
@@ -190,11 +336,14 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 	}
 
 	@Override
-	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) 
-			throws IllegalArgumentException {
+	public ArrayList<Vertex<T>> vertexPath(Vertex<T> startVertex, Vertex<T> endVertex) throws IllegalArgumentException {
 		return null;
 	}
 
+	/**
+	 * This method explores all of the adjacencies of a vertex before exploring the
+	 * adjacencies of the next level.
+	 */
 	@Override
 	public void bfs(Vertex<T> startVertex) {
 		if (!vertices.containsKey(startVertex.getValue())) {
@@ -232,6 +381,10 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method explores from one vertex considered the root vertex as far as
+	 * possible before backtracking.
+	 */
 	@Override
 	public void dfs() {
 		for (Vertex<T> v : listVertex) {
@@ -244,6 +397,13 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method is used by another method of this same class. It's used to mark
+	 * which vertexes are visited.
+	 * 
+	 * @param vertex
+	 *            the visited vertex.
+	 */
 	private void dfsVisit(Vertex<T> vertex) {
 		vertex.setColor(Vertex.BLACK);
 		int indexU = vertices.get(vertex);
@@ -258,6 +418,10 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method is used to find the shortest path from one vertex to the other
+	 * vertexes.
+	 */
 	@Override
 	public void dijkstra(Vertex<T> startVertex) {
 		ShortestPath sp = new ShortestPath();
@@ -265,6 +429,10 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		sp.dijkstra(distMatrix, src);
 	}
 
+	/**
+	 * This method is used to find the shortest path from one vertex to other
+	 * vertexes, it can work with negative weighted edges.
+	 */
 	@Override
 	public boolean bellmanFord(Vertex<T> starVertex) {
 		ShortestPath sp = new ShortestPath();
@@ -282,6 +450,13 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 
 	}
 
+	/**
+	 * This method returns the adjacencies of a vertex as an ArrayList.
+	 * 
+	 * @param v
+	 *            the vertex to know its adjacencies.
+	 * @return ArrayList the adjacencies of the parameter vertex.
+	 */
 	public ArrayList<Vertex<T>> getAdjacentVertices(Vertex<T> v) {
 		int index = vertices.get(v.getValue());
 		ArrayList<Vertex<T>> result = new ArrayList<Vertex<T>>();
@@ -293,6 +468,9 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		return result;
 	}
 
+	/**
+	 * This method is used to find the minimum spanning tree for a connected graph.
+	 */
 	@Override
 	public void prim(Vertex<T> vertex) {
 		for (Vertex<T> v : listVertex) {
@@ -320,6 +498,10 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		}
 	}
 
+	/**
+	 * This method is used to find the shortest path from any vertex to any other
+	 * vertex.
+	 */
 	@Override
 	public int[][] floydWarshall() {
 		int[][] weightMatrix = adjMatrix.clone();
@@ -337,6 +519,10 @@ public class GraphMatrix<T> implements GraphInterface<T> {
 		return weightMatrix;
 	}
 
+	/**
+	 * This method is used to find the minimum spanning tree for a connected or
+	 * disconnected graph.
+	 */
 	@Override
 	public ArrayList<Edge<T>> kruskal() {
 		ArrayList<Edge<T>> res = new ArrayList<>();
