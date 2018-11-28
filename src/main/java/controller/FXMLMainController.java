@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
@@ -26,30 +27,28 @@ public class FXMLMainController implements Initializable {
 
 	@FXML
 	private Button btnExit;
-	
-	private FXMLGameController game;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.game =  new FXMLGameController();
+		
 	}
 
 	@FXML
 	public void startGame(ActionEvent event) {
 
-		FXMLLoader loader = new FXMLLoader();
-		AnchorPane gameViewParent;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GameView.fxml")); 
 		
-		try {
-			gameViewParent = (AnchorPane) 
-					loader.load(getClass().getResource("/view/GameView.fxml").openStream());
+		try {  
 
-			Scene gameScene = new Scene(gameViewParent);
+			Parent root = (Parent)loader.load();          
+			FXMLGameController controller = loader.<FXMLGameController>getController();
+
+			Scene gameScene = new Scene(root);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			
 			gameScene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 				public void handle(KeyEvent event) {
-					game.movePlayer(event.getCode().toString());
+					controller.movePlayer(event.getCode().toString());
 				}
 			});
 			
