@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import model.Box;
+import model.Chronometer;
 import model.Map;
 import model.Player;
 
@@ -62,10 +63,22 @@ public class FXMLGameController implements Initializable {
 		}else if(event.equals("SPACE")) {
 			String temp = map.boom();
 			refresh();
-			//temporizador
+			boolean stop = false;
 			
+			Chronometer chrono = new Chronometer();
+			chrono.start();
+			
+			while(!stop) {
+				if(chrono.getSeconds() > 2) {
+					stop = true;
+					chrono.stop();
+				}
+				System.out.println(chrono.getSeconds() + "");
+			}
+
 			map.getBomberman().setImage(temp);
 			refresh();
+			
 		}
 	}
 

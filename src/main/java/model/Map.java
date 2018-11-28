@@ -105,7 +105,6 @@ public class Map {
 		boxes[11][COLUMNS - 1].setFinish(true);
 
 		fillGraph();
-		System.out.println(graph.dijkstra(graph.getVertex(boxes[1][0])) + "");
 	}
 
 	/**
