@@ -227,14 +227,22 @@ public class Map {
 	 */
 	public void createBorders() {
 		for (int i = 0; i < boxes.length; i++) {
+			
 			boxes[0][i].setBreakable(false);
 			boxes[0][i].setOccupied(true);
-			boxes[i][0].setBreakable(false);
-			boxes[i][0].setOccupied(true);
+			
+			if(i != 1) {
+				boxes[i][0].setBreakable(false);
+				boxes[i][0].setOccupied(true);
+			}
+			
 			boxes[ROWS - 1][i].setBreakable(false);
 			boxes[ROWS - 1][i].setOccupied(true);
-			boxes[i][COLUMNS - 1].setBreakable(false);
-			boxes[i][COLUMNS - 1].setOccupied(true);
+			
+			if(i != 11) {
+				boxes[i][COLUMNS - 1].setBreakable(false);
+				boxes[i][COLUMNS - 1].setOccupied(true);
+			}
 		}
 	}
 
@@ -284,21 +292,21 @@ public class Map {
 		}
 		
 		
-		if (direction == Player.UP && !boxes[bomberman.getI() + 1][bomberman.getJ()].isOccupied()) {
+		if (direction == Player.UP && !boxes[bomberman.getI() - 1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 
-			bomberman.setI(bomberman.getI() + 1);
+			bomberman.setI(bomberman.getI() - 1);
 			bomberman.setSteps(bomberman.getSteps() + 1);
 
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(true);
 
-		} else if (direction == Player.DOWN && !boxes[bomberman.getI() - 1][bomberman.getJ()].isOccupied()) {
+		} else if (direction == Player.DOWN && !boxes[bomberman.getI() + 1][bomberman.getJ()].isOccupied()) {
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(false);
 			boxes[bomberman.getI()][bomberman.getJ()].setBomberman(false);
 
-			bomberman.setI(bomberman.getI() - 1);
+			bomberman.setI(bomberman.getI() + 1);
 			bomberman.setSteps(bomberman.getSteps() + 1);
 
 			boxes[bomberman.getI()][bomberman.getJ()].setOccupied(true);

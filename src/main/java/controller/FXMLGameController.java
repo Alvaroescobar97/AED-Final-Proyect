@@ -77,6 +77,7 @@ public class FXMLGameController implements Initializable {
 				gameGrid.add(labels[i][j], j, i);
 			}
 		}
+		lbNumSteps.setText(map.getBomberman().getSteps() + "");
 	}
 
 	public void fillLabelMatrix() {
