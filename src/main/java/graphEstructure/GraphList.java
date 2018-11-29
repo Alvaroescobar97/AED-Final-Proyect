@@ -548,7 +548,7 @@ public class GraphList<T> implements GraphInterface<T> {
 	 * vertexes.
 	 */
 	@Override
-	public int dijkstra(Vertex<T> startVertex) throws IllegalArgumentException {
+	public int[][] dijkstra(Vertex<T> startVertex) throws IllegalArgumentException {
 		if (!adjList.containsKey(startVertex)) throw new IllegalArgumentException();
 		
 		ArrayList<T> vertexVisited = new ArrayList<T>();
@@ -570,7 +570,7 @@ public class GraphList<T> implements GraphInterface<T> {
 			}
 		}
 		
-		return vertexVisited.size() -1;
+		return null;
 	}
 
 	/**

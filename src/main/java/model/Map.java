@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-import graphEstructure.GraphList;
+import graphEstructure.GraphMatrix;
 import graphEstructure.Vertex;
 
 /**
@@ -19,8 +19,9 @@ public class Map {
 	public static final int ROWS = 13;
 	public static final int COLUMNS = 13;
 
+	private int minSteps;
 	private Box[][] boxes;
-	private GraphList<Box> graph;
+	private GraphMatrix<Box> graph;
 	private Player bomberman;
 	private Random random;
 
@@ -29,6 +30,7 @@ public class Map {
 	 * class.
 	 */
 	public Map() {
+		this.minSteps = 0;
 		this.boxes = new Box[ROWS][COLUMNS];
 
 		for (int i = 0; i < boxes.length; i++) {
@@ -105,6 +107,10 @@ public class Map {
 		boxes[11][COLUMNS - 1].setFinish(true);
 
 		fillGraph();
+		Vertex<Box> start = graph.getVertex(boxes[1][0]);
+		
+		int[][] dijk =  graph.dijkstra(start);
+		this.minSteps = dijk[11][COLUMNS-1];
 	}
 
 	/**
@@ -112,7 +118,7 @@ public class Map {
 	 * created as a matrix of boxes.
 	 */
 	public void fillGraph() {
-		this.graph = new GraphList<Box>(false, false);
+		this.graph = new GraphMatrix<Box>(ROWS*COLUMNS,false, false);
 
 		for (int i = 0; i < boxes.length; i++) {
 			for (int j = 0; j < boxes[0].length; j++) {
@@ -147,7 +153,6 @@ public class Map {
 
 			}
 		}
-
 	}
 
 	/**
@@ -184,6 +189,14 @@ public class Map {
 		boxes[1][COLUMNS - 1].setFinish(true);
 
 		fillGraph();
+		Vertex<Box> start = graph.getVertex(boxes[1][0]);
+		
+		int[][] dijk =  graph.dijkstra(start);
+		this.minSteps = dijk[11][COLUMNS-1];
+	}
+	
+	public int getMin() {
+		return this.minSteps;
 	}
 
 	/**
@@ -219,6 +232,10 @@ public class Map {
 		boxes[ROWS - 1][COLUMNS - 1].setFinish(true);
 
 		fillGraph();
+		Vertex<Box> start = graph.getVertex(boxes[1][0]);
+		
+		int[][] dijk =  graph.dijkstra(start);
+		this.minSteps = dijk[11][COLUMNS-1];
 	}
 
 	/**

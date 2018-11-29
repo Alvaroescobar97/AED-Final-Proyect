@@ -98,6 +98,7 @@ public class FXMLGameController implements Initializable {
 			}
 		}
 		lbNumSteps.setText(map.getBomberman().getSteps() + "");
+		this.lbMaxSteps.setText(map.getMin() +"");
 	}
 
 	public void fillLabelMatrix() {
